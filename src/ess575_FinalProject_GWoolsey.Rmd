@@ -1,0 +1,82 @@
+---
+title: "ESS 575: Final Project"
+author: "George Woolsey" 
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 3
+linkcolor: blue
+header-includes:
+  - \usepackage{caption}
+  - \captionsetup[figure]{labelformat=empty}
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding){ 
+    out_dir <- '../';
+    rmarkdown::render(inputFile, encoding = encoding, output_file=file.path(dirname(inputFile), out_dir, 'ESS575_FinalProject_GWoolsey.pdf')) 
+  })
+---
+
+```{r setup, include=F}
+# knit options
+knitr::opts_chunk$set(
+  echo = TRUE
+  , warning = FALSE
+  , message = FALSE
+  , fig.height = 5
+  , fig.width = 7
+  , eval = TRUE
+  , fig.align='center'
+)
+```
+
+# Introduction
+
+In this particular example we ask the question: How does variation in weather modify feedbacks between population density and population growth rate in a population of large herbivores occupying a landscape where precipitation is variable in time? Answering this question requires a model that portrays density dependence, effects of precipitation, and their interaction.
+
+# process model
+
+We pose the deterministic model portraying population as = g ( β , N t − 1 , x t , t ) = N t − 1 where N t is the unobserved, true (corresponding to z in eq. 1.1.5); x t e ( β 0 + β 1 N t − 1 growth of the wildebeest + β 2 x t + β 3 N t − 1 x t ) t , (1.2.1) abundance of wildebeest in year t is a measure of the annual rainfall
+
+
+Write a brief introduction to the problem you are studying. The first few sentences should provide the broad context –why is the general topic important to the discipline of ecology, citing a few key papers. Proceed to explain why your specific work will advance understanding of the broad topic. Describe the core questions and or objectives of the work. The introduction should resemble a funnel – big topics at the top narrowing to specific questions at the bottom. You want to convince the reader that your specific model system is well poised to provide general insight in ecology. By the way, this is how all papers and proposals should begin.
+
+# Data and Research design 
+
+Describe the data that you will use to fit models and how they were collected. Imagine that you were giving me one of the word problems on writing hierarchical models I gave you (payback). I need to know enough to be able to write the model myself. I don’t need to know details of methods for data collection, but I do need to understand the design. Explain spatial and or temporal structure of the data and describe sources of calibration and sampling uncertainty
+
+# Model 
+
+Write and explain the deterministic model (or models if you plan model selection) that expresses your ideas about way a process works. Most of these are likely to be from the general linear model family. Others may be more specialized. Write the proportionality between the posterior and joint distributions. I urge you to strive for a model that is hierarchical in some fashion because this has been the emphasis of the course. Please include a directed acyclic graph as part of the description. I want to see that diagram translated into fully specified math, including your choices of distributions for likelihoods, latent quantities, and priors. I will not insist that you deal with spatial autocorrelation if your data are spatially structured because we will not cover this material. That said, I will be impressed and forgiving if you take this on.
+
+```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="Bayesian network for lynx population", fig.align='center'}
+knitr::include_graphics("../data/DAG.jpg")
+```
+
+### Process model:
+
+$$
+N_{t} \sim {\sf lognormal} \biggl(\log \bigl( \lambda (N_{t-1} - H_{t-1}) \bigr)  , \sigma^{2}_{p} \biggr)
+$$
+
+### Data model:
+
+$$
+y_{t} \sim {\sf Poisson} \bigr( N_{t} \cdot \phi \bigr)
+$$
+
+### Posterior and Joint:
+
+\begin{align*}
+\bigl[ \boldsymbol{N},\phi, \lambda, \sigma^{2}_{p} \mid \boldsymbol{y} \bigr] &\propto \prod_{t=2}^{T} {\sf Poisson} \bigr( y_{t} \mid N_{t} \cdot \phi \bigr) \\ 
+&\times \; {\sf lognormal} \biggl(N_{t} \biggm| \log \bigl( \lambda (N_{t-1} - H_{t-1}) \bigr)  , \sigma^{2}_{p} \biggr)\\
+&\times \; {\sf normal} \bigr( N_{1} \mid \frac{y_1}{\phi} \bigr) \\
+&\times \; {\sf beta} \bigr( \phi \mid 154,792) \\
+&\times \; {\sf uniform} \bigr( \lambda \mid 0,1) \\ 
+&\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0,1) \\ 
+\end{align*}
+
+# Analysis 
+
+Write a section that describes the computational procedures you will use, tests for convergence, and posterior predictive checks. Describe any important derived quantities. This should read the like the section you would write for a paper to be submitted to a journal. Consult published Bayesian papers for examples.
