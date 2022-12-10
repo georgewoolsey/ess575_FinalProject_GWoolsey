@@ -123,16 +123,62 @@ $$
 To represent sources of noise related to measurement error (e.g. failure to perfectly observe NPP from  optical satellite remote sensing; imperfections of the algorithm used to model NPP), observed NPP is modeled as draws from a lognormal distribution with $z$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{p}$) represents measurement error. Future work building on the dynamic hierarchical model presented here could integrate analysis of the relationship between fine-scale flux tower measurements and satellite-based estimates of NPP (e.g. Jay et al., 2016) to relate the unobserved, true NPP to observed NPP.
 
 ## Full Model
+
+The full model, including prior distributions, is specified by the following statement in which items in bold represent matrices:
+
+$$
+\left(\left(\begin{array}{c}
+\mu_{\alpha}\\
+\mu_{\alpha}\\
+\mu_{\beta}
+\end{array}\right),\boldsymbol{\Sigma}\right)
+$$
+
+
 $$
 \begin{align*}
-\bigl[ \boldsymbol{N},\phi, \lambda, \sigma^{2}_{p} \mid \boldsymbol{y} \bigr] &\propto \prod_{t=2}^{T} {\sf Poisson} \bigr( y_{t} \mid N_{t} \cdot \phi \bigr) \\ 
-&\times \; {\sf lognormal} \biggl(N_{t} \biggm| \log \bigl( \lambda (N_{t-1} - H_{t-1}) \bigr)  , \sigma^{2}_{p} \biggr)\\
-&\times \; {\sf normal} \bigr( N_{1} \mid \frac{y_1}{\phi} \bigr) \\
+\bigl[ \boldsymbol{z},\boldsymbol{\beta},\boldsymbol{\mu_{\beta}}, \sigma^{2}_{p}, \sigma^{2}_{d} \mid \boldsymbol{y} \bigr] &\propto \\
+&\prod_{i=1}^{n}\prod_{j=1}^{6}\prod_{t=2}^{9} {\sf lognormal} \bigl(y_{ijt} \mid z_{ijt}, \sigma^{2}_{d} \bigr) \\ 
+&\times \; {\sf lognormal} \biggl(z_{ijt} \biggm| \log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)\\
+&\times \; {\sf normal} \bigr( z_{ij1} \mid y_{ij1} \bigr) \\
+&\times \; \text{multivariate normal}\left(\left(\begin{array}{c}
+  \beta_{0j}\\
+  \beta_{1j}\\
+  \beta_{2j}\\
+  \beta_{3j}
+\end{array}\right) \bigg|
+\left(\begin{array}{c}
+  \mu_{\beta_{0}}\\
+  \mu_{\beta_{1}}\\
+  \mu_{\beta_{2}}\\
+  \mu_{\beta_{3}}
+\end{array}\right)
+,\boldsymbol{\Sigma}\right) \\
+&\times \; {\sf Wishart} \left(\boldsymbol{\Sigma} \, \bigg|
+\left(\begin{array}{c}
+  1 & 0 & 0  & 0 \\
+  0 & 1 & 0  & 0 \\
+  0 & 0 & 1  & 0 \\
+  0 & 0 & 0  & 1
+\end{array}\right)
+,4+1\right) \\
+
+  
+\end{align*}
+$$
+
+
+\begin{pmatrix}
+1 & 2 & 3\\
+a & b & c
+\end{pmatrix}
 &\times \; {\sf beta} \bigr( \phi \mid 154,792) \\
 &\times \; {\sf uniform} \bigr( \lambda \mid 0,1) \\ 
 &\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0,1) \\ 
-\end{align*}
-$$
+
+
+
+
 helicopter is estimated separately for each unit.
 We chose vague priors for two parameters for
 which we had no prior information: process error
