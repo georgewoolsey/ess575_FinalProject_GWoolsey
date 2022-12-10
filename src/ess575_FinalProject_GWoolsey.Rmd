@@ -35,12 +35,22 @@ knitr::opts_chunk$set(
 
 In this particular example we ask the question: How does variation in weather modify feedbacks between population density and population growth rate in a population of large herbivores occupying a landscape where precipitation is variable in time? Answering this question requires a model that portrays density dependence, effects of precipitation, and their interaction.
 
-# process model
-
-We pose the deterministic model portraying population as = g ( β , N t − 1 , x t , t ) = N t − 1 where N t is the unobserved, true (corresponding to z in eq. 1.1.5); x t e ( β 0 + β 1 N t − 1 growth of the wildebeest + β 2 x t + β 3 N t − 1 x t ) t , (1.2.1) abundance of wildebeest in year t is a measure of the annual rainfall
-
-
 Write a brief introduction to the problem you are studying. The first few sentences should provide the broad context –why is the general topic important to the discipline of ecology, citing a few key papers. Proceed to explain why your specific work will advance understanding of the broad topic. Describe the core questions and or objectives of the work. The introduction should resemble a funnel – big topics at the top narrowing to specific questions at the bottom. You want to convince the reader that your specific model system is well poised to provide general insight in ecology. By the way, this is how all papers and proposals should begin.
+
+We use NPP to quantify resistance and resilience and evaluate the relative effects of two commonly implemented silvicultural systems in mediating responses to a spatially expansive and extreme disturbance across a subalpine forest landscape. In the southern Rocky Mountains, a recent outbreak beginning 2009–2010 of the spruce bark beetle (Dendroctonus rufipennis Kirby) resulted in the death of millions of mature trees, and some agencies estimate a loss of 1 M ha of forest canopy cover in the state of Colorado alone due to these events (Colorado State Forest Service, 2018). The tree species primarily impacted by this event is Engelmann spruce (Picea engelmannii), a slow-growing, shade-tolerant conifer. There is general concern among forest managers, the scientific community, and the public about whether this outbreak will have long-term consequences for forest growth and composition (Schapira et al., 2021). In our study region (Figure 2), shelterwood silvicultural systems are commonly implemented and intended to increase establishment of seedling cohorts (WindmullerCampione et al., 2017); shelterwood is also a potential management approach for increasing resistance and resilience to bark beetle outbreaks. The shelterwood method requires a series of entries, typically (1) a preparatory cut that removes up to 10% of the stand basal area, keeping species intended for recruitment in a regular spatial arrangement and removing undesirable species, (2) a second establishment cut removes another 20%–30% is intended to prepare a seedbed and increase growing space for recruitment, and (3) an overstory removal cut to release established seedlings/saplings from competition with dominant trees (Alexander, 1987; Deal, 2018). Shelterwood treatments might therefore be associated with resistance or resilience of spruce forests to bark beetle outbreaks if pre-outbreak reductions in tree density, competitive release of surviving trees, or the rapid regrowth of seedling cohorts following outbreak are associated with detectable losses or gains in forest productivity, respectively. Approximately 20 years prior to the outbreak, shelterwood cuts were implemented across the study landscape; at the time of the outbreak shelterwood stands were early in their sequence of treatments (i.e., only preparatory/establishment cuts had been implemented) and forest structure resembled a multi-aged system. In addition, salvage logging was implemented throughout the region in some post-outbreak stands to recover economic value from timber resources damaged by spruce beetle. This pre-existing patchwork of silvicultural prescriptions (shelterwood preparatory/ establishment cuts and salvage logging) with differing objectives, along with nearby non-treated stands in wilderness areas, provides a tractable opportunity for examining how treatments interact with resistance and resilience in relation to forest carbon fixation.
+
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
+knitr::include_graphics("../data/WFF_map.jpg")
+```
+
+**Fig. 1.** 2013 West Fork Fire Complex on the Rio Grande National Forest (Colorado, USA) courtesy of (Verdin, Dupree, & Stevens, 2013)
+
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
+knitr::include_graphics("../data/xxx.jpg")
+```
+
+**Fig. 2.** Management treatment and natural disturbance interaction matrix representing the 6 group-level classifications () in the Bayesian dynamic hierarchical model utilized in this analysis
+
 
 # Data and Research design 
 
@@ -50,15 +60,11 @@ Describe the data that you will use to fit models and how they were collected. I
 
 The modelling objective in this analysis is to fit a logistic growth model for forest regrowth using the Landsat Net Primary Production (NPP) data product while accounting for variance in modelling the ecological process unrelated to forest regrowth. A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model implemented and described below includes a model of the ecological process (unobserved latent state), a model linking the process to observed data, and models for parameters. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
 
-```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="Bayesian network for lynx population", fig.align='center'}
+```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/DAG.jpg")
 ```
 
-**Fig. 3.** Hierarchical Bayesian model of the dynamics of forest productivity (NPP) regrowth on the Rio Grande National Forest (Colorado, USA) following the 2013 West Fork Fire Complex. The true NPP for 30-m pixel *i* in treatment, disturbance interaction group *j* at time *t* is modeled using the deterministic model (Eqn. 1), which represents the effects of the true, unobserved NPP ($z_{ijt}$); the climatic water deficit ($x_{ijt}$); and their interaction on forest regrowth. 
-
-The parameter σ 2 p represents all the effects on wildebeest abundance not represented by the β . The y t j is a single observation of population density obtained from one of j = 1 , . . . , n t photographs chosen from area = a km 2 . The parameter σ 2 s represents sampling error. The arrow diagram is a Bayesian network, also called a directed acyclic graph , that can be used as a visual guide for properly writing the full model. The solid lines show stochastic relationships. The dashed lines show deterministic relationships, implying that the quantities at the tails of the arrows are known without error.
-Hobbs, N. Thompson, and Mevin B. Hooten. Bayesian Models : A Statistical Primer for Ecologists, Princeton University Press, 2015. ProQuest Ebook Central, http://ebookcentral.proquest.com/lib/csu/detail.action?docID=1983781.
-Created from csu on 2022-12-10 00:28:26.
+**Fig. 3.** Hierarchical Bayesian model of the dynamics of forest productivity (NPP) regrowth on the Rio Grande National Forest (Colorado, USA) following the 2013 West Fork Fire Complex. The true NPP for 30-m pixel *i* in treatment, disturbance interaction group *j* at time *t* is modeled using the deterministic model (Eqn. 1), which represents the effects of the true, unobserved NPP ($z_{ijt}$); the climatic water deficit ($x_{ijt}$); and their interaction on forest regrowth. See below for interpretation of the $\boldsymbol{\beta}$ parameters. The data model relates observed values of NPP ($y_{ijt}$) at pixel *i* in treatment, disturbance interaction group *j* at time *t* to the latent state ($z$). The solid lines show stochastic relationships while the dashed lines show deterministic relationships, implying that the quantities at the tails of the arrows are known without error (Hobbs & Hooten, 2015).
 
 ## Deterministic model:
 
@@ -105,7 +111,11 @@ $$
 z_{ijt} \sim {\sf lognormal} \biggl(\log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)
 $$
 
-### Data model:
+## Data model:
+
+The data model relates observed values of NPP ($y_{ijt}$) at pixel *i* in treatment, disturbance interaction group *j* at time *t* to the latent state ($z$). To represent sources of noise related to measurement error (e.g. failure to perfectly observe NPP from  optical satellite remote sensing; imperfections of the algorithm used to model NPP), observed NPP is modeled as draws from a lognormal distribution with $z$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{p}$) represents measurement error.
+
+xxxxxxx
 
 $$
 y_{t} \sim {\sf Poisson} \bigr( N_{t} \cdot \phi \bigr)
@@ -130,3 +140,13 @@ Write a section that describes the computational procedures you will use, tests 
 and σ 2 o is observation variance that accounts for the uncertainty caused by the difference between the true state and our observation of the true state. 10 The model is hierarchical because z t appears on both sides of the conditioning. The dynamics in this model are known as ﬁrst-order “Markovian” because the process depends on itself in time only through its most recent value. We want to know the probability distribution of the true state at some future point in time conditional on the observations of the state in the past. If the observed data extend from t = 1 , ..., T , we seek to make inferences about z t > T . These inferences are forecasts (sensu Clark, 2003b; Cressie and Wikle, 2011) because they are predictions of the future state accompanied by proper estimates of uncertainty. Predictive inference is commonly desired for the data ( y T + 1 ) and/or latent process ( z T + 1 ), where the subscript T + 1 indicates one time interval into the future, or at least a time extending beyond the period of data collection. In the case of the inference on the data ( y T + 1 ), we seek the usual posterior predictive distribution, as previously described:
 Hobbs, N. Thompson, and Mevin B. Hooten. Bayesian Models : A Statistical Primer for Ecologists, Princeton University Press, 2015. ProQuest Ebook Central, http://ebookcentral.proquest.com/lib/csu/detail.action?docID=1983781.
 Created from csu on 2022-12-10 00:02:35.
+
+
+\newpage
+
+# References
+
+Verdin, K. L., Dupree, J. A., & Stevens, M. R. (2013). Postwildfire debris-flow hazard assessment of the area burned by the 2013 West Fork Fire Complex, southwestern Colorado. US Department of the Interior, US Geological Survey.
+
+
+
