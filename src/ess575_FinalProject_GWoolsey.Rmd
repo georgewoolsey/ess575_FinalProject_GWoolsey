@@ -48,16 +48,61 @@ Describe the data that you will use to fit models and how they were collected. I
 
 # Model 
 
-Write and explain the deterministic model (or models if you plan model selection) that expresses your ideas about way a process works. Most of these are likely to be from the general linear model family. Others may be more specialized. Write the proportionality between the posterior and joint distributions. I urge you to strive for a model that is hierarchical in some fashion because this has been the emphasis of the course. Please include a directed acyclic graph as part of the description. I want to see that diagram translated into fully specified math, including your choices of distributions for likelihoods, latent quantities, and priors. I will not insist that you deal with spatial autocorrelation if your data are spatially structured because we will not cover this material. That said, I will be impressed and forgiving if you take this on.
+The modelling objective in this analysis is to fit a logistic growth model for forest regrowth using the Landsat Net Primary Production (NPP) data product while accounting for variance in modelling the ecological process unrelated to forest regrowth. A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model implemented and described below includes a model of the ecological process (unobserved latent state), a model linking the process to observed data, and models for parameters. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
 
 ```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="Bayesian network for lynx population", fig.align='center'}
 knitr::include_graphics("../data/DAG.jpg")
 ```
 
-### Process model:
+**Fig. 3.** Hierarchical Bayesian model of the dynamics of forest productivity (NPP) regrowth on the Rio Grande National Forest (Colorado, USA) following the 2013 West Fork Fire Complex. The true NPP for 30-m pixel *i* in treatment, disturbance interaction group *j* at time *t* is modeled using the deterministic model (Eqn. 1), which represents the effects of the true, unobserved NPP ($z_{ijt}$); the climatic water deficit ($x_{ijt}$); and their interaction on forest regrowth. 
+
+The parameter σ 2 p represents all the effects on wildebeest abundance not represented by the β . The y t j is a single observation of population density obtained from one of j = 1 , . . . , n t photographs chosen from area = a km 2 . The parameter σ 2 s represents sampling error. The arrow diagram is a Bayesian network, also called a directed acyclic graph , that can be used as a visual guide for properly writing the full model. The solid lines show stochastic relationships. The dashed lines show deterministic relationships, implying that the quantities at the tails of the arrows are known without error.
+Hobbs, N. Thompson, and Mevin B. Hooten. Bayesian Models : A Statistical Primer for Ecologists, Princeton University Press, 2015. ProQuest Ebook Central, http://ebookcentral.proquest.com/lib/csu/detail.action?docID=1983781.
+Created from csu on 2022-12-10 00:28:26.
+
+## Deterministic model:
+
+The logistic growth model was implemented as the ecological process model of forest regrowth. Several studies have shown that the typical trajectory of forest NPP overtime following stand-replacing disturbance is represented by a rapid initial increase with a modest decline thereafter (Gower et al., 1996; Law et al., 2003; Pregitzer & Euskirchen, 2004; Goulden et al., 2011). The logistic growth model has been applied widely to forest growth dynamics, including models of forest succession (Acevedo et al., 2012; Richit et al., 2019).
+
+Forest regrowth rates are not constant as they depend on existing forest cover, that is, they are density dependent. The logistic growth model allows us to predict next year's forest productivity (NPP) but it is always dependent on the previous year's productivity. In the beginning (under zero forest cover conditions), forest regrowth is nearly exponential, with increases close to the maximum instantaneous growth rate $r_{max}$. There is a constant linear decrease in the instantaneous growth rate ($r$) as forest cover increases. Forest regrowth eventually plateaus and fluctuates around the carrying capacity ($K$) which represents the maximum forest cover at which the instantaneous growth rate ($r$) is 0. The strength of density dependence is represented by $\frac{r_{max}}{K}$, where a negative ratio would indicate that the growth rate decreases with increasing forest cover.
+
+The deterministic model used to represent the ecological process is a special form of the logistic growth model, the Ricker equation, which accounts for density-dependent growth:
+
+**Eqn. 1**
 
 $$
-N_{t} \sim {\sf lognormal} \biggl(\log \bigl( \lambda (N_{t-1} - H_{t-1}) \bigr)  , \sigma^{2}_{p} \biggr)
+\begin{align*}
+z_{ijt} = g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt}) &= z_{ijt-1}e^{(\beta_{0j} \,+\, \beta_{1j} \cdot z_{ijt-1} \,+\, \beta_{2j}  \cdot x_{ijt} \,+\, \beta_{3j}  \cdot z_{ijt-1}  \cdot x_{ijt})}  \\
+x &= \textrm{ climatic water deficit}
+\end{align*}
+$$
+
+The model is indexed by the subscripts: 
+
+* *i* representing annual observations of NPP at the 30-m pixel level
+* *j* representing each of the 6 possible treatment, disturbance interactions (Fig. 2)
+* *t* denoting each of the 9 years spanning the regrowth period 2014 to 2022
+
+The biological interpretation of the $\boldsymbol{\beta}$ parameters are:
+
+* $\beta_{0j}$, the intercept, is analogous to the intrinsic, maximum forest growth rate ($r_{max}$) when forest cover is 0 and climatic water deficit is average for treatment, disturbance interaction *j*
+
+* $\beta_{1j}$ slope represents the magnitude of forest competition (i.e., the strength of density dependence) for treatment, disturbance interaction *j*. In the Stochastic Ricker (logistic) Model $\beta_{1j} = \frac{r_{max}}{K}$, where $K$ is the carrying capacity
+
+* $\beta_{2j}$ slope is a measure of the strength of the effect of variation in climatic water deficit for treatment, disturbance interaction *j*
+
+* $\beta_{3j}$ slope represents the magnitude of the effect of climatic water deficit on the effect of density for treatment, disturbance interaction *j*
+
+See Hobbs & Hooten (2015, p.11) for a more thorough description of this model for representing density-dependent growth.
+
+## Process model:
+
+The modelling objective is to fit a logistic growth model for forest regrowth using remotely-sensed, modeled NPP data while accounting for variance in modelling the ecological process unrelated to forest regrowth. The deterministic model of the unobserved latent state variable $z$, which represents "true" NPP, is an imperfect representation of the ecological process of forest regrowth and is subject to process error. The process variance ($\sigma^{2}_{p}$) in the deterministic model accounts for the failure of the model to represent all the influences on the true state.
+
+The process model uses a lognormal distribution for the latent state ($z$) to represent the strictly non-negative, true value of NPP.
+
+$$
+z_{ijt} \sim {\sf lognormal} \biggl(\log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)
 $$
 
 ### Data model:
@@ -67,7 +112,7 @@ y_{t} \sim {\sf Poisson} \bigr( N_{t} \cdot \phi \bigr)
 $$
 
 ### Posterior and Joint:
-
+$$
 \begin{align*}
 \bigl[ \boldsymbol{N},\phi, \lambda, \sigma^{2}_{p} \mid \boldsymbol{y} \bigr] &\propto \prod_{t=2}^{T} {\sf Poisson} \bigr( y_{t} \mid N_{t} \cdot \phi \bigr) \\ 
 &\times \; {\sf lognormal} \biggl(N_{t} \biggm| \log \bigl( \lambda (N_{t-1} - H_{t-1}) \bigr)  , \sigma^{2}_{p} \biggr)\\
@@ -76,7 +121,12 @@ $$
 &\times \; {\sf uniform} \bigr( \lambda \mid 0,1) \\ 
 &\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0,1) \\ 
 \end{align*}
-
+$$
 # Analysis 
 
 Write a section that describes the computational procedures you will use, tests for convergence, and posterior predictive checks. Describe any important derived quantities. This should read the like the section you would write for a paper to be submitted to a journal. Consult published Bayesian papers for examples.
+
+
+and σ 2 o is observation variance that accounts for the uncertainty caused by the difference between the true state and our observation of the true state. 10 The model is hierarchical because z t appears on both sides of the conditioning. The dynamics in this model are known as ﬁrst-order “Markovian” because the process depends on itself in time only through its most recent value. We want to know the probability distribution of the true state at some future point in time conditional on the observations of the state in the past. If the observed data extend from t = 1 , ..., T , we seek to make inferences about z t > T . These inferences are forecasts (sensu Clark, 2003b; Cressie and Wikle, 2011) because they are predictions of the future state accompanied by proper estimates of uncertainty. Predictive inference is commonly desired for the data ( y T + 1 ) and/or latent process ( z T + 1 ), where the subscript T + 1 indicates one time interval into the future, or at least a time extending beyond the period of data collection. In the case of the inference on the data ( y T + 1 ), we seek the usual posterior predictive distribution, as previously described:
+Hobbs, N. Thompson, and Mevin B. Hooten. Bayesian Models : A Statistical Primer for Ecologists, Princeton University Press, 2015. ProQuest Ebook Central, http://ebookcentral.proquest.com/lib/csu/detail.action?docID=1983781.
+Created from csu on 2022-12-10 00:02:35.
