@@ -45,7 +45,7 @@ knitr::include_graphics("../data/WFF_map.jpg")
 
 **Fig. 1.** 2013 West Fork Fire Complex on the Rio Grande National Forest (Colorado, USA) courtesy of (Verdin, Dupree, & Stevens, 2013)
 
-```{r, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
+```{r, eval=FALSE, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/xxx.jpg")
 ```
 
@@ -60,7 +60,7 @@ Describe the data that you will use to fit models and how they were collected. I
 
 The modelling objective in this analysis is to fit a logistic growth model for forest regrowth using the Landsat Net Primary Production (NPP) data product while accounting for variance in modelling the ecological process unrelated to forest regrowth. A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model implemented and described below includes a model of the ecological process (unobserved latent state), a model linking the process to observed data, and models for parameters. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
 
-```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="", fig.align='center'}
+```{r, eval=FALSE, echo=FALSE, out.width="80%", out.height="80%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/DAG.jpg")
 ```
 
@@ -74,14 +74,10 @@ Forest regrowth rates are not constant over time as they depend on existing fore
 
 The deterministic model used to represent the ecological process is a special form of the logistic growth model, the Ricker equation, which accounts for density-dependent growth:
 
-**Eqn. 1**
-
-$$
 \begin{align*}
 z_{ijt} = g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt}) &= z_{ijt-1}e^{(\beta_{0j} \,+\, \beta_{1j} \cdot z_{ijt-1} \,+\, \beta_{2j}  \cdot x_{ijt} \,+\, \beta_{3j}  \cdot z_{ijt-1}  \cdot x_{ijt})}  \\
 x &= \textrm{ climatic water deficit}
 \end{align*}
-$$
 
 The process model of the unobserved, true NPP ($z_{ijt}$) is indexed by the subscripts: 
 
@@ -126,21 +122,14 @@ To represent sources of noise related to measurement error (e.g. failure to perf
 
 The full model, including prior distributions, is specified by the following statement in which items in bold represent matrices:
 
-$$
-\left(\left(\begin{array}{c}
-\mu_{\alpha}\\
-\mu_{\alpha}\\
-\mu_{\beta}
-\end{array}\right),\boldsymbol{\Sigma}\right)
-$$
 
-
-$$
 \begin{align*}
 \bigl[ \boldsymbol{z},\boldsymbol{\beta},\boldsymbol{\mu_{\beta}}, \sigma^{2}_{p}, \sigma^{2}_{d} \mid \boldsymbol{y} \bigr] &\propto \\
 &\prod_{i=1}^{n}\prod_{j=1}^{6}\prod_{t=2}^{9} {\sf lognormal} \bigl(y_{ijt} \mid z_{ijt}, \sigma^{2}_{d} \bigr) \\ 
 &\times \; {\sf lognormal} \biggl(z_{ijt} \biggm| \log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)\\
 &\times \; {\sf normal} \bigr( z_{ij1} \mid y_{ij1} \bigr) \\
+&\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0, 1 \bigr) \\
+&\times \; {\sf uniform} \bigr( \sigma^{2}_{d} \mid 0, 1 \bigr) \\
 &\times \; \text{multivariate normal}\left(\left(\begin{array}{c}
   \beta_{0j}\\
   \beta_{1j}\\
@@ -162,44 +151,27 @@ $$
   0 & 0 & 0  & 1
 \end{array}\right)
 ,4+1\right) \\
-
-  
+&\times \, \prod_{k=0}^{3} {\sf normal} \bigr( \mu_{\beta_{k}} \mid 0,100000 \bigr)
 \end{align*}
-$$
 
+Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0}, \beta_{j1},\beta_{j2},\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman & Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m $ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative.
 
-\begin{pmatrix}
-1 & 2 & 3\\
-a & b & c
-\end{pmatrix}
-&\times \; {\sf beta} \bigr( \phi \mid 154,792) \\
-&\times \; {\sf uniform} \bigr( \lambda \mid 0,1) \\ 
-&\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0,1) \\ 
-
-
-
-
-helicopter is estimated separately for each unit.
-We chose vague priors for two parameters for
-which we had no prior information: process error
-(r2
-p) and the effects of climate (bclimate). 
+Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
 
 # Analysis 
 
 Write a section that describes the computational procedures you will use, tests for convergence, and posterior predictive checks. Describe any important derived quantities. This should read the like the section you would write for a paper to be submitted to a journal. Consult published Bayesian papers for examples.
 
 
-and σ 2 o is observation variance that accounts for the uncertainty caused by the difference between the true state and our observation of the true state. 10 The model is hierarchical because z t appears on both sides of the conditioning. The dynamics in this model are known as ﬁrst-order “Markovian” because the process depends on itself in time only through its most recent value. We want to know the probability distribution of the true state at some future point in time conditional on the observations of the state in the past. If the observed data extend from t = 1 , ..., T , we seek to make inferences about z t > T . These inferences are forecasts (sensu Clark, 2003b; Cressie and Wikle, 2011) because they are predictions of the future state accompanied by proper estimates of uncertainty. Predictive inference is commonly desired for the data ( y T + 1 ) and/or latent process ( z T + 1 ), where the subscript T + 1 indicates one time interval into the future, or at least a time extending beyond the period of data collection. In the case of the inference on the data ( y T + 1 ), we seek the usual posterior predictive distribution, as previously described:
-Hobbs, N. Thompson, and Mevin B. Hooten. Bayesian Models : A Statistical Primer for Ecologists, Princeton University Press, 2015. ProQuest Ebook Central, http://ebookcentral.proquest.com/lib/csu/detail.action?docID=1983781.
-Created from csu on 2022-12-10 00:02:35.
-
-
 \newpage
 
 # References
 
-Verdin, K. L., Dupree, J. A., & Stevens, M. R. (2013). Postwildfire debris-flow hazard assessment of the area burned by the 2013 West Fork Fire Complex, southwestern Colorado. US Department of the Interior, US Geological Survey.
+Gelman, A., & Hill, J. (2009). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
 
 Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016). Evaluation of modelled net primary production using MODIS and landsat satellite data fusion. Carbon Balance and Management, 11(1), 1-13.
+
+Verdin, K. L., Dupree, J. A., & Stevens, M. R. (2013). Postwildfire debris-flow hazard assessment of the area burned by the 2013 West Fork Fire Complex, southwestern Colorado. US Department of the Interior, US Geological Survey.
+
+
 
