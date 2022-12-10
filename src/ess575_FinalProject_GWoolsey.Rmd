@@ -68,9 +68,9 @@ knitr::include_graphics("../data/DAG.jpg")
 
 ## Deterministic model:
 
-The logistic growth model was implemented as the ecological process model of forest regrowth. Several studies have shown that the typical trajectory of forest NPP overtime following stand-replacing disturbance is represented by a rapid initial increase with a modest decline thereafter (Gower et al., 1996; Law et al., 2003; Pregitzer & Euskirchen, 2004; Goulden et al., 2011). The logistic growth model has been applied widely to forest growth dynamics, including models of forest succession (Acevedo et al., 2012; Richit et al., 2019).
+The logistic growth model was implemented as the ecological process model of forest regrowth. Several studies have shown that the typical trajectory of forest NPP overtime following stand-replacing disturbance is represented by a rapid initial increase with a modest decline thereafter (Gower et al., 1996; Law et al., 2003; Pregitzer & Euskirchen, 2004; Goulden et al., 2011). The logistic growth model has been applied widely to forest growth dynamics including models of forest succession and dispersion (Acevedo et al., 2012; Richit et al., 2019).
 
-Forest regrowth rates are not constant as they depend on existing forest cover, that is, they are density dependent. The logistic growth model allows us to predict next year's forest productivity (NPP) but it is always dependent on the previous year's productivity. In the beginning (under zero forest cover conditions), forest regrowth is nearly exponential, with increases close to the maximum instantaneous growth rate $r_{max}$. There is a constant linear decrease in the instantaneous growth rate ($r$) as forest cover increases. Forest regrowth eventually plateaus and fluctuates around the carrying capacity ($K$) which represents the maximum forest cover at which the instantaneous growth rate ($r$) is 0. The strength of density dependence is represented by $\frac{r_{max}}{K}$, where a negative ratio would indicate that the growth rate decreases with increasing forest cover.
+Forest regrowth rates are not constant over time as they depend on existing forest cover, that is, they are density dependent. The logistic growth model allows us to predict next year's forest productivity (NPP) but it is always dependent on the previous year's productivity. In the beginning (under zero forest cover conditions), forest regrowth is nearly exponential, with increases close to the maximum instantaneous growth rate $r_{max}$. There is a constant linear decrease in the instantaneous growth rate ($r$) as forest cover increases. Forest growth eventually plateaus and fluctuates around the carrying capacity ($K$) which represents the maximum forest cover at which the instantaneous growth rate ($r$) is 0. The strength of density dependence is represented by $\frac{r_{max}}{K}$, where a negative ratio would indicate that the growth rate decreases with increasing forest cover.
 
 The deterministic model used to represent the ecological process is a special form of the logistic growth model, the Ricker equation, which accounts for density-dependent growth:
 
@@ -83,7 +83,7 @@ x &= \textrm{ climatic water deficit}
 \end{align*}
 $$
 
-The model is indexed by the subscripts: 
+The process model of the unobserved, true NPP ($z_{ijt}$) is indexed by the subscripts: 
 
 * *i* representing annual observations of NPP at the 30-m pixel level
 * *j* representing each of the 6 possible treatment, disturbance interactions (Fig. 2)
@@ -101,27 +101,28 @@ The biological interpretation of the $\boldsymbol{\beta}$ parameters are:
 
 See Hobbs & Hooten (2015, p.11) for a more thorough description of this model for representing density-dependent growth.
 
-## Process model:
+## Process model
 
 The modelling objective is to fit a logistic growth model for forest regrowth using remotely-sensed, modeled NPP data while accounting for variance in modelling the ecological process unrelated to forest regrowth. The deterministic model of the unobserved latent state variable $z$, which represents "true" NPP, is an imperfect representation of the ecological process of forest regrowth and is subject to process error. The process variance ($\sigma^{2}_{p}$) in the deterministic model accounts for the failure of the model to represent all the influences on the true state.
 
-The process model uses a lognormal distribution for the latent state ($z$) to represent the strictly non-negative, true value of NPP.
+The process model uses a lognormal distribution for the latent state ($z$) to represent the strictly non-negative, true value of NPP:
 
 $$
 z_{ijt} \sim {\sf lognormal} \biggl(\log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)
 $$
 
-## Data model:
+## Data model
 
-The data model relates observed values of NPP ($y_{ijt}$) at pixel *i* in treatment, disturbance interaction group *j* at time *t* to the latent state ($z$). To represent sources of noise related to measurement error (e.g. failure to perfectly observe NPP from  optical satellite remote sensing; imperfections of the algorithm used to model NPP), observed NPP is modeled as draws from a lognormal distribution with $z$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{p}$) represents measurement error.
+The data model relates observed values of NPP ($y_{ijt}$) at pixel *i* in treatment, disturbance interaction group *j* at time *t* to the latent state $z_{ijt}$:
 
-xxxxxxx
 
 $$
-y_{t} \sim {\sf Poisson} \bigr( N_{t} \cdot \phi \bigr)
+y_{ijt} \sim {\sf lognormal} \bigl(z_{ijt}, \sigma^{2}_{d} \bigr)
 $$
 
-### Posterior and Joint:
+To represent sources of noise related to measurement error (e.g. failure to perfectly observe NPP from  optical satellite remote sensing; imperfections of the algorithm used to model NPP), observed NPP is modeled as draws from a lognormal distribution with $z$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{p}$) represents measurement error. Future work building on the dynamic hierarchical model presented here could integrate analysis of the relationship between fine-scale flux tower measurements and satellite-based estimates of NPP (e.g. Jay et al., 2016) to relate the unobserved, true NPP to observed NPP.
+
+## Full Model
 $$
 \begin{align*}
 \bigl[ \boldsymbol{N},\phi, \lambda, \sigma^{2}_{p} \mid \boldsymbol{y} \bigr] &\propto \prod_{t=2}^{T} {\sf Poisson} \bigr( y_{t} \mid N_{t} \cdot \phi \bigr) \\ 
@@ -132,6 +133,12 @@ $$
 &\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0,1) \\ 
 \end{align*}
 $$
+helicopter is estimated separately for each unit.
+We chose vague priors for two parameters for
+which we had no prior information: process error
+(r2
+p) and the effects of climate (bclimate). 
+
 # Analysis 
 
 Write a section that describes the computational procedures you will use, tests for convergence, and posterior predictive checks. Describe any important derived quantities. This should read the like the section you would write for a paper to be submitted to a journal. Consult published Bayesian papers for examples.
@@ -148,5 +155,5 @@ Created from csu on 2022-12-10 00:02:35.
 
 Verdin, K. L., Dupree, J. A., & Stevens, M. R. (2013). Postwildfire debris-flow hazard assessment of the area burned by the 2013 West Fork Fire Complex, southwestern Colorado. US Department of the Interior, US Geological Survey.
 
-
+Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016). Evaluation of modelled net primary production using MODIS and landsat satellite data fusion. Carbon Balance and Management, 11(1), 1-13.
 
