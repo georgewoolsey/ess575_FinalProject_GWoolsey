@@ -45,8 +45,7 @@ Here, we use Net Primary Productivity (NPP) to quantify forest resistance and re
 
 The study area for this analysis is the 35,600 ha (88,000 acres) that burned during the 2013 West Fork and Papoose Fires (Fig. 1) on the Rio Grande National Forest (Colorado, USA). A portion of this fire footprint was impacted by spruce bark beetle beginning in 2009-2010 to the time of the fire disturbance in 2013. Between 2009 and 2013 some of the beetle-killed stands were salvage logged to reduce subsequent fire hazard and recover forest timber value. This area has a history of timber harvests and fuel reduction treatments that occurred prior to the 2009-2013 beetle outbreak and 2013 wildfire. This pre-existing patchwork of silvicultural prescriptions and beetle disturbance along with non-treated, and non-beetle impacted stands provides a natural experiment opportunity for examining how treatments interact with disturbance to influence subsequent forest regrowth and carbon fixation. We examine post-wildfire forest regrowth for 6 unique silvicultural treatment and natural disturbance interaction histories (Fig. 2).
 
-
-
+Our response variable is post-wildfire (2014-2022), pixel-level annual NPP from the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. We account for spatial variability in water availability, a primary driver of post-disturbance forest regrowth (Rodman et al., 2020; Hoylman et al., 2021), by including annual climatic water deficit (CWD; deficit = potential evapotranspiration [PET] - actual evapotranspiration [AET]; Stephenson, 1998) as an explanatory variable. An annual (2014-2022) CWD measurement was attached to each 30-m pixel based on a gridded climate dataset at 250-m resolution (Abatzoglou et al., 2018).
 
 ```{r, echo=FALSE, out.width="75%", out.height="75%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/WFF_map.jpg")
@@ -59,23 +58,6 @@ knitr::include_graphics("../data/xxx.jpg")
 ```
 
 **Fig. 2.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis
-
-
-
-
-In this particular example we ask the questions: How does variation in weather modify feedbacks between population density and population growth rate in a population of large herbivores occupying a landscape where precipitation is variable in time?
-
-The goal of this work is to apply an approach for monitoring resistance and resilience using readily available datasets. We model variability in NPP across a 35-year time series (1986–2019) to assess how forest management, site-level vegetation structure, composition, and physiography impact forest resistance and resilience to a spruce beetle outbreak, applying a framework initially developed in Isbell et al. (2015) to evaluate biodiversity– productivity relationships. We address two specific objectives concerned with optimizing treatment methods: (1) we determine whether different patterns of resistance and resilience are detectable for different silvicultural treatments and (2) we characterize how variability in forest structure and physiography impact resistance and resilience metrics. The analysis framework can be readily applied by forest managers to monitor resistance and resilience as treatment outcomes and plan for forest carbon, as similar objectives are often written into forest management plans.
-
-
-There is general concern among forest managers, the scientific community, and the public about whether this outbreak will have long-term consequences for forest growth and composition (Schapira et al., 2021). In our study region (Figure 2), shelterwood silvicultural systems are commonly implemented and intended to increase establishment of seedling cohorts (WindmullerCampione et al., 2017); shelterwood is also a potential management approach for increasing resistance and resilience to bark beetle outbreaks. The shelterwood method requires a series of entries, typically (1) a preparatory cut that removes up to 10% of the stand basal area, keeping species intended for recruitment in a regular spatial arrangement and removing undesirable species, (2) a second establishment cut removes another 20%–30% is intended to prepare a seedbed and increase growing space for recruitment, and (3) an overstory removal cut to release established seedlings/saplings from competition with dominant trees (Alexander, 1987; Deal, 2018). Shelterwood treatments might therefore be associated with resistance or resilience of spruce forests to bark beetle outbreaks if pre-outbreak reductions in tree density, competitive release of surviving trees, or the rapid regrowth of seedling cohorts following outbreak are associated with detectable losses or gains in forest productivity, respectively. Approximately 20 years prior to the outbreak, shelterwood cuts were implemented across the study landscape; at the time of the outbreak shelterwood stands were early in their sequence of treatments (i.e., only preparatory/establishment cuts had been implemented) and forest structure resembled a multi-aged system. In addition, salvage logging was implemented throughout the region in some post-outbreak stands to recover economic value from timber resources damaged by spruce beetle. This pre-existing patchwork of silvicultural prescriptions (shelterwood preparatory/ establishment cuts and salvage logging) with differing objectives, along with nearby non-treated stands in wilderness areas, provides a tractable opportunity for examining how treatments interact with resistance and resilience in relation to forest carbon fixation.
-
-
-Describe the data that you will use to fit models and how they were collected. Imagine that you were giving me one of the word problems on writing hierarchical models I gave you (payback). I need to know enough to be able to write the model myself. I don’t need to know details of methods for data collection, but I do need to understand the design. Explain spatial and or temporal structure of the data and describe sources of calibration and sampling uncertainty
-
-Productivity Data 
-Plants are primary producers converting CO2, water, and solar energy into biomass via photosynthesis providing the carbon and energy that drives biological processes (Chapin, Matson, & Vitousek, 2011). Net primary production (NPP) is the difference between carbon input to ecosystems (gross primary production [GPP]) and respiration by plants (Rp) to provide the energy that supports their own growth and maintenance (Chapin, Matson, & Vitousek, 2011). NPP is therefore a measure of the net carbon gain by plants. Classified as a supporting ecosystem service, NPP is necessary to produce all other ecosystem services provided by forests including wood products, carbon sequestration, and air purification (Millennium Ecosystem Assessment, 2005). NPP can be readily extracted across large spatial scales using remotely sensed data (Running et al., 2004) and directly reflects key biological activity and carbon dynamics.
-To examine relationships between primary productivity and land ownership, this study used the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. This data has been used widely to evaluate ecosystem productivity at the continental scale (e.g., Robinson et al., 2019; Al‐Yaari et al., 2020; Maurer et al., 2020) and is well suited for monitoring the spatiotemporal variability of NPP across ownership, land-use, and management regimes.
 
 # Model 
 
@@ -188,6 +170,8 @@ Write a section that describes the computational procedures you will use, tests 
 
 # References
 
+Abatzoglou, J. T., Dobrowski, S. Z., Parks, S. A., & Hegewisch, K. C. (2018). TerraClimate, a high-resolution global dataset of monthly climate and climatic water balance from 1958–2015. Scientific data, 5(1), 1-12.
+
 Andrus, R. A., Veblen, T. T., Harvey, B. J., & Hart, S. J. (2016). Fire severity unaffected by spruce beetle outbreak in spruce‐fir forests in southwestern Colorado. Ecological applications, 26(3), 700-711.
 
 Colorado State Forest Service. (2018). Report on the Health of Colorado’s Forests. Colorado State Forest Service. Colorado State University, Fort Collins, Colorado.
@@ -204,7 +188,11 @@ Hicke, J. A., Meddens, A. J., Allen, C. D., & Kolden, C. A. (2013). Carbon stock
 
 Hobbs, N. T., & Hooten, M. B. (2015). Bayesian Models: A Statistical Primer for Ecologists. Princeton University Press.
 
+Hoylman, Z. H., Jencso, K., Archer, V., Efta, J. A., Holden, Z. A., Ballantyne, A. P., & Johnson, M. (2021). The influence of hydroclimate and management on forest regrowth across the western US. Environmental Research Letters, 16(6), 064057.
+
 Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016). Evaluation of modelled net primary production using MODIS and landsat satellite data fusion. Carbon Balance and Management, 11(1), 1-13.
+
+Stephenson, N. (1998). Actual evapotranspiration and deficit: biologically meaningful correlates of vegetation distribution across spatial scales. Journal of biogeography, 25(5), 855-870.
 
 Verdin, K. L., Dupree, J. A., & Stevens, M. R. (2013). Postwildfire debris-flow hazard assessment of the area burned by the 2013 West Fork Fire Complex, southwestern Colorado. US Department of the Interior, US Geological Survey.
 
