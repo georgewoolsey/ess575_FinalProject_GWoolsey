@@ -1,13 +1,12 @@
 ---
-# title: "ESS 575: Final Project"
-# author: "George Woolsey" 
-# date: "`r format(Sys.time(), '%d %B, %Y')`"
+title: "ESS 575: Final Project"
+author: "George Woolsey" 
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document:
     toc: false
     toc_depth: 3
 linkcolor: blue
-geometry: margin=2cm
 header-includes:
   - \usepackage{caption}
   - \captionsetup[figure]{labelformat=empty}
@@ -18,8 +17,6 @@ knit: (function(inputFile, encoding){
     rmarkdown::render(inputFile, encoding = encoding, output_file=file.path(dirname(inputFile), out_dir, 'ESS575_FinalProject_GWoolsey.pdf')) 
   })
 ---
-
-**Author: George Woolsey | ESS 575 Final Project | December 11, 2022**
 
 ```{r setup, include=F}
 # knit options
@@ -38,39 +35,37 @@ knitr::opts_chunk$set(
 
 Global forests have contributed a large and persistent net removal of carbon from the atmosphere over the past century (Birdsey & Heath, 1995; Goodale et al., 2002; Pan et al., 2011). By significantly slowing the rate of climate change, this carbon sink constitutes a valuable ecosystem service (Fahey et al., 2010; Keenan & Williams, 2018). There are increasing worries that these sinks will weaken and may eventually reverse to carbon sources as the global climate warms and CO_2 emissions fall (Peñuelas et al., 2017; Denning, 2022).
 
-Fire suppression, land use change, and climate change over the last 150 years have shifted forest composition in the USA (Houghton et al., 1999; Gallant et al., 2003). The resulting forests are substantially more dense with homogeneous structure, higher density of late seral species, and high surface fuel loads and ladder fuels connecting surface to crown fuels (Savage et al. 2013, Battaglia et al. 2018). Denser, more uniform forests are more vulnerable to mortality from fire, drought, disease, insect infestations, and weather damage (Dale et al., 2001). These impacts are especially pronounced in the western USA where disturbances are leading to substantial abrupt landscape alterations and significant carbon emissions from forests (Stephens, 2005; Zhang et al., 2012; Hicke et al., 2013; Rodman et al., 2020; Hagmann et al., 2021). There has recently been great emphasis on silvicultural practices and management strategies that increase forest resistance and resilience to disturbance and reduce the potential for carbon losses (Millar et al., 2007; DeRose & Long, 2014; Hessburg et al., 2021; Prichard et al., 2021).
+Fire suppression, land use change, and climate change over the last 150 years have shifted forest composition in the USA (Houghton, Hackler, & Lawrence, 1999; Gallant et al., 2003). The resulting forests are substantially more dense with homogeneous structure, higher density of late seral species, and high surface fuel loads and ladder fuels connecting surface to crown fuels (Savage et al. 2013, Battaglia et al. 2018). Denser, more uniform forests are more vulnerable to mortality from fire, drought, disease, insect infestations, and weather damage (Dale et al., 2001). These impacts are especially pronounced in the western USA where disturbances are leading to substantial abrupt landscape alterations and significant carbon emissions from forests (Stephens, 2005; Zhang et al., 2012; Hicke et al., 2013; Rodman et al., 2020; Hagmann et al., 2021). There has recently been great emphasis on silvicultural practices and management strategies that increase forest resistance and resilience to disturbance and reduce the potential for carbon losses (Millar et al., 2007; DeRose & Long, 2014; Hessburg et al., 2021; Prichard et al., 2021).
 
 In this study, Net Primary Productivity (NPP) was used to quantify forest resistance and resilience and evaluate the relative effects of management actions in mediating responses to compound disturbances in a forested ecosystem. The primary research question is: How do forest management treatments interact with bark beetle disturbance to influence forest resistance and resilience to wildfire? The objective of this analysis is to assess how post-wildfire forest regrowth is influenced by prior forest management and biotic disturbance to inform evaluations of the trade-offs between fire mitigation, timber harvest, and forest carbon.
 
 # Data and Research design 
 
-The study area for this analysis is the 35,600 ha (88,000 acres) that burned during the [2013 West Fork and Papoose Fires](https://www.fs.usda.gov/detail/riogrande/home/?cid=stelprdb5425999) on the Rio Grande National Forest (Colorado, USA). A portion of this fire footprint was impacted by spruce bark beetle (*Dendroctonus rufipennis*) beginning in 2009-2010 to the time of the fire disturbance in 2013. The wildfire perimeter was acquired from the Monitoring Trends in Burn Severity ([MTBS](https://www.mtbs.gov/direct-download)) program (Eidenshink et al. 2007) and data from the Forest Health Monitoring ([FHM](https://www.fs.usda.gov/detail/r2/forest-grasslandhealth/?cid=fsbdev3_041629)) was used to identify beetle-impacted areas (USFS, 2021). Between 2009 and 2013 some of the beetle-killed stands were salvage logged to reduce subsequent fire hazard and recover forest timber value (Dobor et al., 2020). This area has a history of timber harvests and fuel reduction treatments that occurred prior to the 2009-2013 beetle outbreak and 2013 wildfire. Forest management activities including fuel treatments, timber harvests, and salvage logging were identified using the Forest Service Activity Tracking System (FACTS; USFS, 2022). This pre-existing patchwork of silvicultural prescriptions and beetle disturbance along with non-treated, and non-beetle impacted stands provides a natural experiment opportunity for examining how treatments interact with disturbance to influence subsequent forest regrowth and carbon fixation. We examine post-wildfire forest regrowth for 6 unique silvicultural treatment and natural disturbance interaction histories (Figure 1).
+The study area for this analysis is the 35,600 ha (88,000 acres) that burned during the [2013 West Fork and Papoose Fires](https://www.fs.usda.gov/detail/riogrande/home/?cid=stelprdb5425999) on the Rio Grande National Forest (Colorado, USA). A portion of this fire footprint was impacted by spruce bark beetle (*Dendroctonus rufipennis*) beginning in 2009-2010 to the time of the fire disturbance in 2013. The wildfire perimeter was acquired from the Monitoring Trends in Burn Severity ([MTBS](https://www.mtbs.gov/direct-download)) program (Eidenshink et al. 2007) and data from the Forest Health Monitoring ([FHM](https://www.fs.usda.gov/detail/r2/forest-grasslandhealth/?cid=fsbdev3_041629)) program of the US Department of Agriculture's Forest Service (USFS) was used to identify beetle-impacted areas (USFS, 2021). Between 2009 and 2013 some of the beetle-killed stands were salvage logged to reduce subsequent fire hazard and recover forest timber value (Dobor et al., 2020). This area has a history of timber harvests and fuel reduction treatments that occurred prior to the 2009-2013 beetle outbreak and 2013 wildfire. Forest management activities including fuel treatments, timber harvests, and salvage logging were identified using the Forest Service Activity Tracking System (FACTS; USFS, 2022). This pre-existing patchwork of silvicultural prescriptions and beetle disturbance along with non-treated, and non-beetle impacted stands provides a natural experiment opportunity for examining how treatments interact with disturbance to influence subsequent forest regrowth and carbon fixation. We examine post-wildfire forest regrowth for 6 unique silvicultural treatment and natural disturbance interaction histories (Figure 1).
 
-Our response variable is post-wildfire (2014-2022), pixel-level annual NPP from the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. We account for spatial variability in water availability, a primary driver of post-disturbance forest regrowth (Rodman et al., 2020; Hoylman et al., 2021), by including annual climatic water deficit (CWD; Stephenson, 1998) as an explanatory variable. An annual (2014-2022) CWD measurement was attached to each 30-m pixel based on a gridded climate dataset at 250-m resolution (Abatzoglou et al., 2018).
+Our response variable is post-wildfire (2014-2022), pixel-level annual NPP from the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. We account for spatial variability in water availability, a primary driver of post-disturbance forest regrowth (Rodman et al., 2020; Hoylman et al., 2021), by including annual climatic water deficit (CWD; deficit = potential evapotranspiration [PET] - actual evapotranspiration [AET]; Stephenson, 1998) as an explanatory variable. An annual (2014-2022) CWD measurement was attached to each 30-m pixel based on a gridded climate dataset at 250-m resolution (Abatzoglou et al., 2018).
 
 ```{r, eval=FALSE, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/xxx.jpg")
 ```
 
-**Figure 1.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis.
+**Figure 1.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis
 
 # Model 
 
-The modelling objective in this analysis was to fit a logistic growth model for forest regrowth using satellite-based NPP measurements while accounting for variance in modelling the ecological process unrelated to forest regrowth. The logistic growth model was implemented as the ecological process model of forest regrowth as several studies have shown that the typical trajectory of forest NPP overtime following stand-replacing disturbance is represented by a rapid initial increase with a modest decline thereafter (Gower et al., 1996; Law et al., 2003; Pregitzer & Euskirchen, 2004; Goulden et al., 2011).
+The modelling objective in this analysis is to fit a logistic growth model for forest regrowth using the Landsat Net Primary Production (NPP) data product while accounting for variance in modelling the ecological process unrelated to forest regrowth. A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model implemented and described below includes a model of the ecological process (unobserved latent state), a model linking the process to observed data, and models for parameters. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
 
-Forest regrowth rates are not constant over time as they depend on existing forest cover, that is, they are density dependent. The logistic growth model allows us to predict next year's forest productivity (NPP) but it is always dependent on the previous year's productivity. In the beginning (under zero forest cover conditions), forest regrowth is nearly exponential, with increases close to the maximum instantaneous growth rate $r_{max}$. There is a constant linear decrease in the instantaneous growth rate ($r$) as forest cover increases. Forest growth eventually plateaus and fluctuates around the carrying capacity ($K$) which represents the maximum forest cover at which the instantaneous growth rate ($r$) is 0. The strength of density dependence is represented by $\frac{r_{max}}{K}$, where a negative ratio would indicate that the growth rate decreases with increasing forest cover.
-
-A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model described below includes a model of the ecological process for the unobserved, latent state and a model linking the process to observed data. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
-
-```{r, echo=FALSE, out.width="35%", out.height="35%", fig.cap="", fig.align='center'}
+```{r, eval=FALSE, echo=FALSE, out.width="70%", out.height="70%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/DAG.jpg")
 ```
 
-**Figure 2.** Hierarchical Bayesian model of the dynamics of forest regrowth on the Rio Grande National Forest (Colorado, USA) following the 2013 West Fork Fire Complex.
+**Figure 2.** Hierarchical Bayesian model of the dynamics of forest productivity (NPP) regrowth on the Rio Grande National Forest (Colorado, USA) following the 2013 West Fork Fire Complex. The true NPP for 30-m pixel *i* in treatment, disturbance interaction group *j* at time *t* is modeled using the deterministic model (Eqn. 1), which represents the effects of the true, unobserved NPP ($z_{ijt}$); the climatic water deficit ($x_{ijt}$); and their interaction on forest regrowth. See below for interpretation of the $\boldsymbol{\beta}$ parameters. The data model relates observed values of NPP ($y_{ijt}$) at pixel *i* in treatment, disturbance interaction group *j* at time *t* to the latent state ($z$). The solid lines show stochastic relationships while the dashed lines show deterministic relationships, implying that the quantities at the tails of the arrows are known without error (Hobbs & Hooten, 2015).
 
-## Process model:
+## Deterministic model:
 
-### Deterministic model:
+The logistic growth model was implemented as the ecological process model of forest regrowth. Several studies have shown that the typical trajectory of forest NPP overtime following stand-replacing disturbance is represented by a rapid initial increase with a modest decline thereafter (Gower et al., 1996; Law et al., 2003; Pregitzer & Euskirchen, 2004; Goulden et al., 2011). The logistic growth model has been applied widely to forest growth dynamics including models of forest succession and dispersion (Acevedo et al., 2012; Richit et al., 2019).
+
+Forest regrowth rates are not constant over time as they depend on existing forest cover, that is, they are density dependent. The logistic growth model allows us to predict next year's forest productivity (NPP) but it is always dependent on the previous year's productivity. In the beginning (under zero forest cover conditions), forest regrowth is nearly exponential, with increases close to the maximum instantaneous growth rate $r_{max}$. There is a constant linear decrease in the instantaneous growth rate ($r$) as forest cover increases. Forest growth eventually plateaus and fluctuates around the carrying capacity ($K$) which represents the maximum forest cover at which the instantaneous growth rate ($r$) is 0. The strength of density dependence is represented by $\frac{r_{max}}{K}$, where a negative ratio would indicate that the growth rate decreases with increasing forest cover.
 
 The deterministic model used to represent the ecological process is a special form of the logistic growth model, the Ricker model, which accounts for density-dependent growth:
 
@@ -79,7 +74,7 @@ z_{ijt} = g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt}) &= z_{ijt-1}e^{(\beta_{0j}
 x &= \textrm{ climatic water deficit}
 \end{align*}
 
-The model of the unobserved, "true" NPP ($z_{ijt}$) is indexed by the subscripts: 
+The process model of the unobserved, true NPP ($z_{ijt}$) is indexed by the subscripts: 
 
 * *i* representing annual observations of NPP at the 30-m pixel level
 * *j* representing each of the 6 possible treatment, disturbance interactions (Figure 1)
@@ -94,7 +89,11 @@ The biological interpretation of the $\boldsymbol{\beta}$ parameters are:
 
 See Hobbs & Hooten (2015, p.11) for a more thorough description of this model for representing density-dependent growth.
 
-The deterministic model of the unobserved "true" NPP ($z$) is an imperfect representation of the ecological process of forest regrowth and is subject to process error. The process variance ($\sigma^{2}_{p}$) accounts for the failure of the model to represent all the influences on the true state. The process model uses a lognormal distribution for the latent state ($z$) to represent strictly non-negative NPP values:
+## Process model
+
+The modelling objective is to fit a logistic growth model for forest regrowth using remotely-sensed, modeled NPP data while accounting for variance in modelling the ecological process unrelated to forest regrowth. The deterministic model of the unobserved latent state variable $z$, which represents "true" NPP, is an imperfect representation of the ecological process of forest regrowth and is subject to process error. The process variance ($\sigma^{2}_{p}$) in the deterministic model accounts for the failure of the model to represent all the influences on the true state.
+
+The process model uses a lognormal distribution for the latent state ($z$) to represent the strictly non-negative, true value of NPP:
 
 $$
 z_{ijt} \sim {\sf lognormal} \biggl(\log \bigl( g(\boldsymbol{\beta}_j, z_{ijt-1}, x_{ijt})  \bigr)  , \sigma^{2}_{p} \biggr)
@@ -108,7 +107,7 @@ $$
 y_{ijt} \sim {\sf lognormal} \bigl(z_{ijt}, \sigma^{2}_{d} \bigr)
 $$
 
-To represent sources of noise related to measurement error (e.g. imperfections in the algorithm used to model NPP), observed NPP ($y_{ijt}$) is modeled as draws from a lognormal distribution with $z_{ijt}$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{d}$) represents measurement error. Future work building on the dynamic hierarchical model presented here could integrate analysis of the relationship between fine-scale flux tower measurements and satellite-based estimates of NPP (e.g. Jay et al., 2016) to better relate the unobserved, true NPP to observed NPP.
+To represent sources of noise related to measurement error (e.g. failure to perfectly observe NPP from  optical satellite remote sensing; imperfections of the algorithm used to model NPP), observed NPP is modeled as draws from a lognormal distribution with $z$ as the mean value and a variance term $\sigma^{2}_{d}$. The magnitude of the observation uncertainty ($\sigma^{2}_{p}$) represents measurement error. Future work building on the dynamic hierarchical model presented here could integrate analysis of the relationship between fine-scale flux tower measurements and satellite-based estimates of NPP (e.g. Jay et al., 2016) to relate the unobserved, true NPP to observed NPP.
 
 ## Full Model
 
@@ -145,7 +144,7 @@ The full model, including prior distributions, is specified by the following sta
 &\times \, \prod_{k=0}^{3} {\sf normal} \bigr( \mu_{\beta_{k}} \mid 0,100000 \bigr)
 \end{align*}
 
-Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0},\cdots,\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman and Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m$ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative. Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
+Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0}, \beta_{j1},\beta_{j2},\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman and Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m$ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative. Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
 
 # Analysis 
 
@@ -181,10 +180,6 @@ Gelman, A., & Hill, J. (2009). Data analysis using regression and multilevel/hie
 
 Goodale, C. L., Apps, M. J., Birdsey, R. A., Field, C. B., Heath, L. S., Houghton, R. A., ... & Shvidenko, A. Z. (2002). Forest carbon sinks in the Northern Hemisphere. Ecological applications, 12(3), 891-899.
 
-Goulden, M. L., McMillan, A. M. S., Winston, G. C., Rocha, A. V., Manies, K. L., Harden, J. W., & Bond‐Lamberty, B. P. (2011). Patterns of NPP, GPP, respiration, and NEP during boreal forest succession. Global Change Biology, 17(2), 855-871.
-
-Gower, S. T., McMurtrie, R. E., & Murty, D. (1996). Aboveground net primary production decline with stand age: potential causes. Trends in Ecology & Evolution, 11(9), 378-382.
-
 Hagmann, R. K., Hessburg, P. F., Prichard, S. J., Povak, N. A., Brown, P. M., Fulé, P. Z., ... & Waltz, A. E. M. (2021). Evidence for widespread changes in the structure, composition, and fire regimes of western North American forests. Ecological applications, 31(8), e02431.
 
 Hessburg, P. F., Prichard, S. J., Hagmann, R. K., Povak, N. A., & Lake, F. K. (2021). Wildfire and climate change adaptation of western North American forests: a case for intentional management. Ecological applications, 31(8), e02432.
@@ -201,8 +196,6 @@ Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016
 
 Keenan, T. F., & Williams, C. A. (2018). The terrestrial carbon sink. Annu. Rev. Environ. Resour, 43(1), 219-243.
 
-Law, B. E., Sun, O. J., Campbell, J., Van Tuyl, S., & Thornton, P. E. (2003). Changes in carbon storage and fluxes in a chronosequence of ponderosa pine. Global change biology, 9(4), 510-524.
-
 Millar, C. I., Stephenson, N. L., & Stephens, S. L. (2007). Climate change and forests of the future: managing in the face of uncertainty. Ecological applications, 17(8), 2145-2151.
 
 Pan, Y., Birdsey, R. A., Fang, J., Houghton, R., Kauppi, P. E., Kurz, W. A., ... & Hayes, D. (2011). A large and persistent carbon sink in the world’s forests. Science, 333(6045), 988-993.
@@ -210,8 +203,6 @@ Pan, Y., Birdsey, R. A., Fang, J., Houghton, R., Kauppi, P. E., Kurz, W. A., ...
 Peñuelas, J., Ciais, P., Canadell, J. G., Janssens, I. A., Fernández-Martínez, M., Carnicer, J., ... & Sardans, J. (2017). Shifting from a fertilization-dominated to a warming-dominated period. Nature ecology & evolution, 1(10), 1438-1445.
 
 Plummer, M. (2003). JAGS: A program for analysis of Bayesian graphical models using Gibbs sampling. DSC Working Papers. Proceedings of the 3rd International Workshop on Distributed Statistical Computing, March 20-22, 2003. Technische Universitat Wien, Vienna, Austria.
-
-Pregitzer, K. S., & Euskirchen, E. S. (2004). Carbon cycling and storage in world forests: biome patterns related to forest age. Global change biology, 10(12), 2052-2077.
 
 Prichard, S. J., Hessburg, P. F., Hagmann, R. K., Povak, N. A., Dobrowski, S. Z., Hurteau, M. D., ... & Khatri‐Chhetri, P. (2021). Adapting western North American forests to climate change and wildfires: 10 common questions. Ecological Applications, 31(8), e02433.
 
