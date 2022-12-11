@@ -33,13 +33,22 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-In this particular example we ask the question: How does variation in weather modify feedbacks between population density and population growth rate in a population of large herbivores occupying a landscape where precipitation is variable in time? Answering this question requires a model that portrays density dependence, effects of precipitation, and their interaction.
+Global forests have contributed a large and persistent net removal of carbon from the atmosphere over the past century (Birdsey & Heath, 1995; Goodale et al., 2002; Pan et al., 2011). Established forests account for the entire terrestrial carbon sink and currently absorb about 30% of fossil fuel CO_2 emissions (Pan et al., 2011). By significantly slowing the rate of climate change, this carbon sink constitutes a valuable ecosystem service (Fahey et al., 2010; Keenan & Williams, 2018). There are increasing worries that these sinks will weaken and may eventually reverse to carbon sources as the global climate warms and CO_2 emissions fall (Peñuelas et al., 2017; Denning, 2022).
 
-Write a brief introduction to the problem you are studying. The first few sentences should provide the broad context –why is the general topic important to the discipline of ecology, citing a few key papers. Proceed to explain why your specific work will advance understanding of the broad topic. Describe the core questions and or objectives of the work. The introduction should resemble a funnel – big topics at the top narrowing to specific questions at the bottom. You want to convince the reader that your specific model system is well poised to provide general insight in ecology. By the way, this is how all papers and proposals should begin.
+Fire suppression, land use change, and climate change over the last 150 years have shifted forest composition in the USA (Houghton, Hackler, & Lawrence, 1999; Gallant et al., 2003). The resulting forests are substantially more dense with homogeneous structure, higher density of late seral species, and high surface fuel loads and ladder fuels connecting surface to crown fuels (Savage et al. 2013, Battaglia et al. 2018). Denser, more uniform forests are more vulnerable to mortality from fire, drought, disease, insect infestations, and weather damage (Dale et al., 2001). These impacts are especially pronounced in the western USA where disturbances are leading to substantial abrupt landscape alterations and significant carbon emissions from forests (Stephens, 2005; Zhang et al., 2012; Hicke et al., 2013; Rodman et al., 2020; Hagmann et al., 2021). There has recently been great emphasis on silvicultural practices and management strategies that increase forest resistance and resilience to disturbance and climate change (Millar et al., 2007; DeRose & Long, 2014; Hessburg et al., 2021; Prichard et al., 2021). Fuel reduction treatments, including partial harvest, prescribed burning, and coupled forest thinning and burning can reduce the potential for carbon losses from disturbance and stabilize forests carbon sinks (Hessburg et al., 2021; Prichard et al. 2021).
 
-We use NPP to quantify resistance and resilience and evaluate the relative effects of two commonly implemented silvicultural systems in mediating responses to a spatially expansive and extreme disturbance across a subalpine forest landscape. In the southern Rocky Mountains, a recent outbreak beginning 2009–2010 of the spruce bark beetle (Dendroctonus rufipennis Kirby) resulted in the death of millions of mature trees, and some agencies estimate a loss of 1 M ha of forest canopy cover in the state of Colorado alone due to these events (Colorado State Forest Service, 2018). The tree species primarily impacted by this event is Engelmann spruce (Picea engelmannii), a slow-growing, shade-tolerant conifer. There is general concern among forest managers, the scientific community, and the public about whether this outbreak will have long-term consequences for forest growth and composition (Schapira et al., 2021). In our study region (Figure 2), shelterwood silvicultural systems are commonly implemented and intended to increase establishment of seedling cohorts (WindmullerCampione et al., 2017); shelterwood is also a potential management approach for increasing resistance and resilience to bark beetle outbreaks. The shelterwood method requires a series of entries, typically (1) a preparatory cut that removes up to 10% of the stand basal area, keeping species intended for recruitment in a regular spatial arrangement and removing undesirable species, (2) a second establishment cut removes another 20%–30% is intended to prepare a seedbed and increase growing space for recruitment, and (3) an overstory removal cut to release established seedlings/saplings from competition with dominant trees (Alexander, 1987; Deal, 2018). Shelterwood treatments might therefore be associated with resistance or resilience of spruce forests to bark beetle outbreaks if pre-outbreak reductions in tree density, competitive release of surviving trees, or the rapid regrowth of seedling cohorts following outbreak are associated with detectable losses or gains in forest productivity, respectively. Approximately 20 years prior to the outbreak, shelterwood cuts were implemented across the study landscape; at the time of the outbreak shelterwood stands were early in their sequence of treatments (i.e., only preparatory/establishment cuts had been implemented) and forest structure resembled a multi-aged system. In addition, salvage logging was implemented throughout the region in some post-outbreak stands to recover economic value from timber resources damaged by spruce beetle. This pre-existing patchwork of silvicultural prescriptions (shelterwood preparatory/ establishment cuts and salvage logging) with differing objectives, along with nearby non-treated stands in wilderness areas, provides a tractable opportunity for examining how treatments interact with resistance and resilience in relation to forest carbon fixation.
+Beginning 2009–2010 an outbreak of the spruce bark beetle (*Dendroctonus rufipennis*) resulted in the death of millions of mature trees across the southern Rocky Mountains (Colorado State Forest Service, 2018). There is general concern about increased wildfire risk due to bark beetle outbreaks (Hicke et al., 2012). Many studies on compound beetle and wildfire disturbances have found that subsequent fire severity is less influenced by pre-fire beetle disturbance and related more to topography, weather, and forest structure (e.g., Andrus et al., 2016) but there are still disagreements and knowledge gaps suggesting that generalizations are unwarranted (Hicke et al., 2012). Salvage logging is a commonly applied management response to forest disturbances. Salvage logging is implemented to recoup economic losses by allowing for forest product use with the additional aim of reducing the risk from subsequent disturbances (Dobor et al., 2020). A recent study suggested that trade-offs with future carbon sequestration should be considered as salvage-logged stands exhibited substantially reduced productivity trajectories compared to non-treated stands (Davis et al., 2022). 
 
-```{r, echo=FALSE, out.width="100%", out.height="100%", fig.cap="", fig.align='center'}
+Here, we use Net Primary Productivity (NPP) to quantify forest resistance and recovery and evaluate the relative effects of management actions in mediating responses to compound disturbances in a forested ecosystem. Our objective is to assess how post-wildfire forest regrowth is influenced by prior silvicultural treatment and beetle disturbance. We ask the question: How do forest management treatments interact with bark beetle disturbance to influence forest resistance and resilience to wildfire? Answering this question requires a model that portrays density dependence, effects of precipitation, and their interaction.
+
+# Data and Research design 
+
+The study area for this analysis is the 35,600 ha (88,000 acres) that burned during the 2013 West Fork and Papoose Fires (Fig. 1) on the Rio Grande National Forest (Colorado, USA). A portion of this fire footprint was impacted by spruce bark beetle beginning in 2009-2010 to the time of the fire disturbance in 2013. Between 2009 and 2013 some of the beetle-killed stands were salvage logged to reduce subsequent fire hazard and recover forest timber value. This area has a history of timber harvests and fuel reduction treatments that occurred prior to the 2009-2013 beetle outbreak and 2013 wildfire. This pre-existing patchwork of silvicultural prescriptions and beetle disturbance along with non-treated, and non-beetle impacted stands provides a natural experiment opportunity for examining how treatments interact with disturbance to influence subsequent forest regrowth and carbon fixation. We examine post-wildfire forest regrowth for 6 unique silvicultural treatment and natural disturbance interaction histories (Fig. 2).
+
+
+
+
+```{r, echo=FALSE, out.width="75%", out.height="75%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/WFF_map.jpg")
 ```
 
@@ -49,18 +58,30 @@ knitr::include_graphics("../data/WFF_map.jpg")
 knitr::include_graphics("../data/xxx.jpg")
 ```
 
-**Fig. 2.** Management treatment and natural disturbance interaction matrix representing the 6 group-level classifications () in the Bayesian dynamic hierarchical model utilized in this analysis
+**Fig. 2.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis
 
 
-# Data and Research design 
+
+
+In this particular example we ask the questions: How does variation in weather modify feedbacks between population density and population growth rate in a population of large herbivores occupying a landscape where precipitation is variable in time?
+
+The goal of this work is to apply an approach for monitoring resistance and resilience using readily available datasets. We model variability in NPP across a 35-year time series (1986–2019) to assess how forest management, site-level vegetation structure, composition, and physiography impact forest resistance and resilience to a spruce beetle outbreak, applying a framework initially developed in Isbell et al. (2015) to evaluate biodiversity– productivity relationships. We address two specific objectives concerned with optimizing treatment methods: (1) we determine whether different patterns of resistance and resilience are detectable for different silvicultural treatments and (2) we characterize how variability in forest structure and physiography impact resistance and resilience metrics. The analysis framework can be readily applied by forest managers to monitor resistance and resilience as treatment outcomes and plan for forest carbon, as similar objectives are often written into forest management plans.
+
+
+There is general concern among forest managers, the scientific community, and the public about whether this outbreak will have long-term consequences for forest growth and composition (Schapira et al., 2021). In our study region (Figure 2), shelterwood silvicultural systems are commonly implemented and intended to increase establishment of seedling cohorts (WindmullerCampione et al., 2017); shelterwood is also a potential management approach for increasing resistance and resilience to bark beetle outbreaks. The shelterwood method requires a series of entries, typically (1) a preparatory cut that removes up to 10% of the stand basal area, keeping species intended for recruitment in a regular spatial arrangement and removing undesirable species, (2) a second establishment cut removes another 20%–30% is intended to prepare a seedbed and increase growing space for recruitment, and (3) an overstory removal cut to release established seedlings/saplings from competition with dominant trees (Alexander, 1987; Deal, 2018). Shelterwood treatments might therefore be associated with resistance or resilience of spruce forests to bark beetle outbreaks if pre-outbreak reductions in tree density, competitive release of surviving trees, or the rapid regrowth of seedling cohorts following outbreak are associated with detectable losses or gains in forest productivity, respectively. Approximately 20 years prior to the outbreak, shelterwood cuts were implemented across the study landscape; at the time of the outbreak shelterwood stands were early in their sequence of treatments (i.e., only preparatory/establishment cuts had been implemented) and forest structure resembled a multi-aged system. In addition, salvage logging was implemented throughout the region in some post-outbreak stands to recover economic value from timber resources damaged by spruce beetle. This pre-existing patchwork of silvicultural prescriptions (shelterwood preparatory/ establishment cuts and salvage logging) with differing objectives, along with nearby non-treated stands in wilderness areas, provides a tractable opportunity for examining how treatments interact with resistance and resilience in relation to forest carbon fixation.
+
 
 Describe the data that you will use to fit models and how they were collected. Imagine that you were giving me one of the word problems on writing hierarchical models I gave you (payback). I need to know enough to be able to write the model myself. I don’t need to know details of methods for data collection, but I do need to understand the design. Explain spatial and or temporal structure of the data and describe sources of calibration and sampling uncertainty
+
+Productivity Data 
+Plants are primary producers converting CO2, water, and solar energy into biomass via photosynthesis providing the carbon and energy that drives biological processes (Chapin, Matson, & Vitousek, 2011). Net primary production (NPP) is the difference between carbon input to ecosystems (gross primary production [GPP]) and respiration by plants (Rp) to provide the energy that supports their own growth and maintenance (Chapin, Matson, & Vitousek, 2011). NPP is therefore a measure of the net carbon gain by plants. Classified as a supporting ecosystem service, NPP is necessary to produce all other ecosystem services provided by forests including wood products, carbon sequestration, and air purification (Millennium Ecosystem Assessment, 2005). NPP can be readily extracted across large spatial scales using remotely sensed data (Running et al., 2004) and directly reflects key biological activity and carbon dynamics.
+To examine relationships between primary productivity and land ownership, this study used the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. This data has been used widely to evaluate ecosystem productivity at the continental scale (e.g., Robinson et al., 2019; Al‐Yaari et al., 2020; Maurer et al., 2020) and is well suited for monitoring the spatiotemporal variability of NPP across ownership, land-use, and management regimes.
 
 # Model 
 
 The modelling objective in this analysis is to fit a logistic growth model for forest regrowth using the Landsat Net Primary Production (NPP) data product while accounting for variance in modelling the ecological process unrelated to forest regrowth. A Bayesian dynamic hierarchical model (i.e., a "state-space" model) was developed to obtain posterior distributions of the latent state and parameters of interest. The hierarchical model implemented and described below includes a model of the ecological process (unobserved latent state), a model linking the process to observed data, and models for parameters. The final model predicts forest NPP regrowth at the pixel level (*i*) for each of the 6 possible treatment, disturbance interactions (*j*), for each year (*t*) over a 9-year regrowth period.
 
-```{r, eval=FALSE, echo=FALSE, out.width="80%", out.height="80%", fig.cap="", fig.align='center'}
+```{r, echo=FALSE, out.width="80%", out.height="80%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/DAG.jpg")
 ```
 
@@ -131,30 +152,30 @@ The full model, including prior distributions, is specified by the following sta
 &\times \; {\sf uniform} \bigr( \sigma^{2}_{p} \mid 0, 1 \bigr) \\
 &\times \; {\sf uniform} \bigr( \sigma^{2}_{d} \mid 0, 1 \bigr) \\
 &\times \; \text{multivariate normal}\left(\left(\begin{array}{c}
-  \beta_{0j}\\
-  \beta_{1j}\\
-  \beta_{2j}\\
-  \beta_{3j}
+\beta_{0j}\\
+\beta_{1j}\\
+\beta_{2j}\\
+\beta_{3j}
 \end{array}\right) \bigg|
 \left(\begin{array}{c}
-  \mu_{\beta_{0}}\\
-  \mu_{\beta_{1}}\\
-  \mu_{\beta_{2}}\\
-  \mu_{\beta_{3}}
+\mu_{\beta_{0}}\\
+\mu_{\beta_{1}}\\
+\mu_{\beta_{2}}\\
+\mu_{\beta_{3}}
 \end{array}\right)
 ,\boldsymbol{\Sigma}\right) \\
-&\times \; {\sf Wishart} \left(\boldsymbol{\Sigma} \, \bigg|
-\left(\begin{array}{c}
-  1 & 0 & 0  & 0 \\
-  0 & 1 & 0  & 0 \\
-  0 & 0 & 1  & 0 \\
-  0 & 0 & 0  & 1
+&\times \; \text{Wishart} \left(\boldsymbol{\Sigma} \, \bigg|
+\left(\begin{array}{cccc}
+1 & 0 & 0  & 0 \\
+0 & 1 & 0  & 0 \\
+0 & 0 & 1  & 0 \\
+0 & 0 & 0  & 1
 \end{array}\right)
 ,4+1\right) \\
 &\times \, \prod_{k=0}^{3} {\sf normal} \bigr( \mu_{\beta_{k}} \mid 0,100000 \bigr)
 \end{align*}
 
-Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0}, \beta_{j1},\beta_{j2},\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman & Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m $ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative.
+Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0}, \beta_{j1},\beta_{j2},\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman and Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m$ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative.
 
 Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
 
@@ -167,7 +188,21 @@ Write a section that describes the computational procedures you will use, tests 
 
 # References
 
+Andrus, R. A., Veblen, T. T., Harvey, B. J., & Hart, S. J. (2016). Fire severity unaffected by spruce beetle outbreak in spruce‐fir forests in southwestern Colorado. Ecological applications, 26(3), 700-711.
+
+Colorado State Forest Service. (2018). Report on the Health of Colorado’s Forests. Colorado State Forest Service. Colorado State University, Fort Collins, Colorado.
+
+Davis, T. S., Meddens, A. J., Stevens‐Rumann, C. S., Jansen, V. S., Sibold, J. S., & Battaglia, M. A. (2022). Monitoring resistance and resilience using carbon trajectories: Analysis of forest management–disturbance interactions. Ecological Applications, 32(8), e2704.
+
+Dobor, L., Hlásny, T., Rammer, W., Zimová, S., Barka, I., & Seidl, R. (2020). Is salvage logging effectively dampening bark beetle outbreaks and preserving forest carbon stocks?. Journal of Applied Ecology, 57(1), 67-76.
+
 Gelman, A., & Hill, J. (2009). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
+
+Hicke, J. A., Johnson, M. C., Hayes, J. L., & Preisler, H. K. (2012). Effects of bark beetle-caused tree mortality on wildfire. Forest Ecology and Management, 271, 81-90.
+
+Hicke, J. A., Meddens, A. J., Allen, C. D., & Kolden, C. A. (2013). Carbon stocks of trees killed by bark beetles and wildfire in the western United States. Environmental Research Letters, 8(3), 035032.
+
+Hobbs, N. T., & Hooten, M. B. (2015). Bayesian Models: A Statistical Primer for Ecologists. Princeton University Press.
 
 Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016). Evaluation of modelled net primary production using MODIS and landsat satellite data fusion. Carbon Balance and Management, 11(1), 1-13.
 
