@@ -1,7 +1,7 @@
 ---
-# title: "ESS 575: Final Project"
-# author: "George Woolsey" 
-# date: "`r format(Sys.time(), '%d %B, %Y')`"
+title: "The influence of forest management treatments on resistance and resilience to compound disturbances"
+author: "George Woolsey"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document:
     toc: false
@@ -15,11 +15,9 @@ editor_options:
   chunk_output_type: console
 knit: (function(inputFile, encoding){ 
     out_dir <- '../';
-    rmarkdown::render(inputFile, encoding = encoding, output_file=file.path(dirname(inputFile), out_dir, 'ESS575_FinalProject_GWoolsey.pdf')) 
+    rmarkdown::render(inputFile, encoding = encoding, output_file=file.path(dirname(inputFile), out_dir, 'TreatmentDisturbanceInteractions_GWoolsey.pdf')) 
   })
 ---
-
-**Author: George Woolsey | ESS 575 Final Project | December 11, 2022**
 
 ```{r setup, include=F}
 # knit options
@@ -36,23 +34,28 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-Global forests have contributed a large and persistent net removal of carbon from the atmosphere over the past century (Birdsey & Heath, 1995; Goodale et al., 2002; Pan et al., 2011). By significantly slowing the rate of climate change, this carbon sink constitutes a valuable ecosystem service (Fahey et al., 2010; Keenan & Williams, 2018). There are increasing worries that these sinks will weaken and may eventually reverse to carbon sources as the global climate warms and CO_2 emissions fall (Peñuelas et al., 2017; Denning, 2022).
+Global forests have contributed a large and persistent net removal of carbon from the atmosphere over the past century (Birdsey & Heath, 1995; Goodale et al., 2002; Pan et al., 2011). By significantly slowing the rate of climate change, this carbon sink constitutes a valuable ecosystem service (Fahey et al., 2010; Keenan & Williams, 2018). There are increasing concerns that these sinks will weaken and may eventually reverse to carbon sources as the global climate warms and $\textrm{CO} _2$ emissions fall (Peñuelas et al., 2017; Denning, 2022).
 
-Fire suppression, land use change, and climate change over the last 150 years have shifted forest composition in the USA (Houghton et al., 1999; Gallant et al., 2003). The resulting forests are substantially more dense with homogeneous structure, higher density of late seral species, and high surface fuel loads and ladder fuels connecting surface to crown fuels (Savage et al. 2013, Battaglia et al. 2018). Denser, more uniform forests are more vulnerable to mortality from fire, drought, disease, insect infestations, and weather damage (Dale et al., 2001). These impacts are especially pronounced in the western USA where disturbances are leading to substantial abrupt landscape alterations and significant carbon emissions from forests (Stephens, 2005; Zhang et al., 2012; Hicke et al., 2013; Rodman et al., 2020; Hagmann et al., 2021). There has recently been great emphasis on silvicultural practices and management strategies that increase forest resistance and resilience to disturbance and reduce the potential for carbon losses (Millar et al., 2007; DeRose & Long, 2014; Hessburg et al., 2021; Prichard et al., 2021).
+Fire suppression, land use change, and climate change over the last 150 years have shifted forest composition in the United States (Houghton et al., 1999; Gallant et al., 2003). The resulting forests are substantially more dense with homogeneous structure, higher density of late seral species, and high surface fuel loads and ladder fuels connecting surface to crown fuels (Savage et al. 2013, Battaglia et al. 2018). Denser, more uniform forests are more vulnerable to mortality from fire, drought, disease, insect infestations, and weather damage (Dale et al., 2001). These impacts are especially pronounced in the western United States (US) where disturbances are leading to substantial abrupt landscape alterations and significant carbon emissions from forests (Stephens, 2005; Zhang et al., 2012; Hicke et al., 2013; Rodman et al., 2020; Hagmann et al., 2021). There has recently been great emphasis on silvicultural practices and management strategies that increase forest resistance and resilience to disturbance and reduce the potential for carbon losses (Millar et al., 2007; DeRose & Long, 2014; Hessburg et al., 2021; Prichard et al., 2021).
 
-In this study, Net Primary Productivity (NPP) was used to quantify forest resistance and resilience and evaluate the relative effects of management actions in mediating responses to compound disturbances in a forested ecosystem. The primary research question is: How do forest management treatments interact with bark beetle disturbance to influence forest resistance and resilience to wildfire? The objective of this analysis is to assess how post-wildfire forest regrowth is influenced by prior forest management and biotic disturbance to inform evaluations of the trade-offs between fire mitigation, timber harvest, and forest carbon.
+The concept of resilience in ecological systems, as defined by Holling’s (1973) seminal paper, is the amount of disturbance that a system can absorb and still maintain key ecosystem processes and structures (i.e., alternative stable states; Gunderson, 2000). The loss of resilience makes the system more likely to transition to a contrasting state after natural disturbances (e.g., fire, climate change) and/or management actions (e.g., harvest, grazing). The concept of resilience can be distilled into the ability of a system to "resist" change from a disturbance event and the capacity to "recover" from a disturbance even though ecological processes may have been weakened (Lake, 2013; Hodgson et al., 2015).
+
+Recent bark beetle outbreaks across the western US have caused extensive tree mortality (USFS, 2021). There is general concern about increased wildfire risk due to bark beetle outbreaks (Hicke et al., 2012). Many studies on compounding beetle-and-wildfire disturbances have found that subsequent fire severity is less influenced by pre-fire beetle disturbance and related more to topography, weather, and forest structure (e.g., Andrus et al., 2016) but there are still disagreements and knowledge gaps suggesting that generalizations are unwarranted (Hicke et al., 2012). Salvage logging is a commonly applied management response to forest disturbances. Salvage logging is implemented to recoup economic losses by allowing for forest product use with the additional aim of reducing the risk from subsequent disturbances (Dobor et al., 2020). A recent study found that salvage-logged stands exhibited substantially reduced productivity trajectories compared to non-treated stands, suggesting trade-offs with future carbon sequestration (Davis et al., 2022). More research on the situations when one disturbance (anthropogenic or natural) can reduce the impact of a subsequent disturbance is needed to improve understanding of compound disturbances (Carlson et al., 2017; Kleinman et al., 2019).
+
+In this study, Net Primary Productivity (NPP) was used to quantify forest resistance and recovery and evaluate the relative effects of management actions in mediating responses to compound disturbances in a forested ecosystem. The primary research question is: How do forest management treatments interact with prior disturbance history to influence forest resistance and resilience to wildfire? The objective of this analysis is to assess how post-wildfire forest regrowth is influenced by prior forest management and biotic disturbance to inform evaluations of the trade-offs between fire mitigation, timber harvest, and forest carbon.
 
 # Data and Research design 
 
 The study area for this analysis is the 35,600 ha (88,000 acres) that burned during the [2013 West Fork and Papoose Fires](https://www.fs.usda.gov/detail/riogrande/home/?cid=stelprdb5425999) on the Rio Grande National Forest (Colorado, USA). A portion of this fire footprint was impacted by spruce bark beetle (*Dendroctonus rufipennis*) beginning in 2009-2010 to the time of the fire disturbance in 2013. The wildfire perimeter was acquired from the Monitoring Trends in Burn Severity ([MTBS](https://www.mtbs.gov/direct-download)) program (Eidenshink et al. 2007) and data from the Forest Health Monitoring ([FHM](https://www.fs.usda.gov/detail/r2/forest-grasslandhealth/?cid=fsbdev3_041629)) was used to identify beetle-impacted areas (USFS, 2021). Between 2009 and 2013 some of the beetle-killed stands were salvage logged to reduce subsequent fire hazard and recover forest timber value (Dobor et al., 2020). This area has a history of timber harvests and fuel reduction treatments that occurred prior to the 2009-2013 beetle outbreak and 2013 wildfire. Forest management activities including fuel treatments, timber harvests, and salvage logging were identified using the Forest Service Activity Tracking System (FACTS; USFS, 2022). This pre-existing patchwork of silvicultural prescriptions and beetle disturbance along with non-treated, and non-beetle impacted stands provides a natural experiment opportunity for examining how treatments interact with disturbance to influence subsequent forest regrowth and carbon fixation. We examine post-wildfire forest regrowth for 6 unique silvicultural treatment and natural disturbance interaction histories (Figure 1).
 
-Our response variable is post-wildfire (2014-2022), pixel-level annual NPP from the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. We account for spatial variability in water availability, a primary driver of post-disturbance forest regrowth (Rodman et al., 2020; Hoylman et al., 2021), by including annual climatic water deficit (CWD; Stephenson, 1998) as an explanatory variable. An annual (2014-2022) CWD measurement was attached to each 30-m pixel based on a gridded climate dataset at 250-m resolution (Abatzoglou et al., 2018).
+Our response variable is post-wildfire (2014-2022), pixel-level annual NPP from the Landsat Net Primary Production CONUS data product which estimates NPP calculated using the MOD17 algorithm (Running & Zhao, 2015) and Landsat Surface Reflectance at 30-m spatial resolution (Robinson et al. 2018). This data estimates the total amount of carbon allocated to plant tissue (above- and below-ground) after accounting for plant respiration by integrating meteorological data, land cover by plant functional type, and optical remote sensing data. We account for spatial variability in water availability, a primary driver of post-disturbance forest regrowth (Rodman et al., 2020; Hoylman et al., 2021), by including annual climatic water deficit (CWD; Stephenson, 1998) as an explanatory variable. An annual (2014-2022) CWD measurement was attached to each 30-m pixel based on a gridded climate dataset at 250-m resolution (Abatzoglou et al., 2018). Future models could include measures of topographic roughness and solar radiation as variable and mesic terrain can enhance post-disturbance forest regrowth (Estes et al., 2017; Povak et al., 2018; Steel et al., 2021).
+
 
 ```{r, echo=FALSE, out.width="45%", out.height="45%", fig.cap="", fig.align='center'}
 knitr::include_graphics("../data/trt_dstrb.jpg")
 ```
 
-**Figure 1.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis.
+**Figure 1.** Silvicultural treatment and natural disturbance interaction matrix representing the 6 group-level classifications in the Bayesian dynamic hierarchical model utilized in this analysis. This figure represents the timeline (from left to right) of possible forest management treatments (blue) and bark beetle disturbance (orange) prior to 2013 West Fork Fire Complex (red). A pixel considered in this analysis could have any interacting combination of timber harvest/fuel treatment (H), bark beetle disturbance (B), and post-beetle salvage logging (S) prior to the fire (F) with lines indicating if the treatment/disturbance did (true) or did not (false) occur in a pixel. Condition 1 (F) serves as the control for areas that were not impacted by bark beetle and condition 2 (B+F) is the control for areas that were impacted by bark beetle as both had no forest management activity prior to the fire. Only pixels within the boundary of the bark beetle disturbance (B) could have been salvage logged (S). Condition 6 (H+B+S+F) classifies pixels with a history of all treatments and disturbances considered in this analysis; these pixels were within the bounds of a timber harvest or fuel treatment (H), then impacted by bark beetles (B), then salvage logged (S) prior to the fire (F).
 
 # Model 
 
@@ -145,7 +148,7 @@ The full model, including prior distributions, is specified by the following sta
 &\times \, \prod_{k=0}^{3} {\sf normal} \bigr( \mu_{\beta_{k}} \mid 0,100000 \bigr)
 \end{align*}
 
-Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0},\cdots,\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman and Hill (2009, pg. 376) for details. The covariance matrix $\boldsymbol{\Sigma}$ (i.e., variance covariance matrix) is an $m \times m$ matrix with ones on the diagonal and zeros on the off diagonals where $m$ is the number of coefficients including the intercept. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative. Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
+Our hypothesis is that different treatment and disturbance interaction groups had different levels of resistance to the fire disturbance (represented by the model intercept) and also different post-fire recovery patterns (represented by the slope of the model). To test this hypothesis, we model group (subscript *j*) effects on intercepts and slopes. In order to understand group effects on multiple parameters ($\beta_{j0},\cdots,\beta_{j3}$ in our model), we account for the way that the parameters covary using a scaled inverse-Wishart model. See Gelman and Hill (2009, pgs. 286, 376) for details. The group-level covariance matrix $\boldsymbol{\Sigma}$ was modeled with the scaled inverse-Wishart distribution as a way to impose reasonably vague priors. Normal priors on the model coefficients ($\boldsymbol{\beta}$) were uninformative. Uniformly distributed vague priors were utilized for the process error ($\sigma^{2}_{p}$) and the measurement error ($\sigma^{2}_{d}$).
 
 # Analysis 
 
@@ -157,13 +160,19 @@ Markov chain Monte Carlo (MCMC) simulations were conducted using the rjags and c
 
 Abatzoglou, J. T., Dobrowski, S. Z., Parks, S. A., & Hegewisch, K. C. (2018). TerraClimate, a high-resolution global dataset of monthly climate and climatic water balance from 1958–2015. Scientific data, 5(1), 1-12.
 
+Andrus, R. A., Veblen, T. T., Harvey, B. J., & Hart, S. J. (2016). Fire severity unaffected by spruce beetle outbreak in spruce‐fir forests in southwestern Colorado. Ecological applications, 26(3), 700-711.
+
 Battaglia, M. A., Gannon, B., Brown, P. M., Fornwalt, P. J., Cheng, A. S., & Huckaby, L. S. (2018). Changes in forest structure since 1860 in ponderosa pine dominated forests in the Colorado and Wyoming Front Range, USA. Forest Ecology and Management, 422, 147-160.
 
 Birdsey, R. A., & Heath, L. S. (1995). Carbon changes in U.S. forests. p. 56–70. In L.A. Joyce (ed.) Productivity of America’s forests and climate change. Gen. Tech. Rep. RM-271. USDA For. Serv., Rocky Mountain Res. Stn., Fort Collins, CO.
 
 Brooks, S. P., & Gelman, A. (1998). General methods for monitoring convergence of iterative simulations. Journal of computational and graphical statistics, 7(4), 434-455.
 
+Carlson, A. R., Sibold, J. S., Assal, T. J., & Negrón, J. F. (2017). Evidence of compounded disturbance effects on vegetation recovery following high-severity wildfire and spruce beetle outbreak. PloS one, 12(8), e0181778.
+
 Dale, V. H., Joyce, L. A., McNulty, S., Neilson, R. P., Ayres, M. P., Flannigan, M. D., ... & Wotton, B. M. (2001). Climate change and forest disturbances: climate change can affect forests by altering the frequency, intensity, duration, and timing of fire, drought, introduced species, insect and pathogen outbreaks, hurricanes, windstorms, ice storms, or landslides. BioScience, 51(9), 723-734.
+
+Davis, T. S., Meddens, A. J., Stevens‐Rumann, C. S., Jansen, V. S., Sibold, J. S., & Battaglia, M. A. (2022). Monitoring resistance and resilience using carbon trajectories: Analysis of forest management–disturbance interactions. Ecological Applications, 32(8), e2704.
 
 Denning, A. S. (2022). Where Has All the Carbon Gone?. Annual Review of Earth and Planetary Sciences, 50, 55-78.
 
@@ -172,6 +181,8 @@ DeRose, R. J., & Long, J. N. (2014). Resistance and resilience: a conceptual fra
 Dobor, L., Hlásny, T., Rammer, W., Zimová, S., Barka, I., & Seidl, R. (2020). Is salvage logging effectively dampening bark beetle outbreaks and preserving forest carbon stocks?. Journal of Applied Ecology, 57(1), 67-76.
 
 Eidenshink, J., Schwind, B., Brewer, K., Zhu, Z. L., Quayle, B., & Howard, S. (2007). A project for monitoring trends in burn severity. Fire ecology, 3(1), 3-21.
+
+Estes, B. L., Knapp, E. E., Skinner, C. N., Miller, J. D., & Preisler, H. K. (2017). Factors influencing fire severity under moderate burning conditions in the Klamath Mountains, northern California, USA. Ecosphere, 8(5), e01794.
 
 Fahey, T. J., Woodbury, P. B., Battles, J. J., Goodale, C. L., Hamburg, S. P., Ollinger, S. V., & Woodall, C. W. (2010). Forest carbon storage: ecology, management, and policy. Frontiers in Ecology and the Environment, 8(5), 245-252.
 
@@ -185,13 +196,21 @@ Goulden, M. L., McMillan, A. M. S., Winston, G. C., Rocha, A. V., Manies, K. L.,
 
 Gower, S. T., McMurtrie, R. E., & Murty, D. (1996). Aboveground net primary production decline with stand age: potential causes. Trends in Ecology & Evolution, 11(9), 378-382.
 
+Gunderson, L. H. (2000). Ecological resilience--in theory and application. Annual review of ecology and systematics, 425-439.
+
 Hagmann, R. K., Hessburg, P. F., Prichard, S. J., Povak, N. A., Brown, P. M., Fulé, P. Z., ... & Waltz, A. E. M. (2021). Evidence for widespread changes in the structure, composition, and fire regimes of western North American forests. Ecological applications, 31(8), e02431.
 
 Hessburg, P. F., Prichard, S. J., Hagmann, R. K., Povak, N. A., & Lake, F. K. (2021). Wildfire and climate change adaptation of western North American forests: a case for intentional management. Ecological applications, 31(8), e02432.
 
+Hicke, J. A., Johnson, M. C., Hayes, J. L., & Preisler, H. K. (2012). Effects of bark beetle-caused tree mortality on wildfire. Forest Ecology and Management, 271, 81-90.
+
 Hicke, J. A., Meddens, A. J., Allen, C. D., & Kolden, C. A. (2013). Carbon stocks of trees killed by bark beetles and wildfire in the western United States. Environmental Research Letters, 8(3), 035032.
 
 Hobbs, N. T., & Hooten, M. B. (2015). Bayesian Models: A Statistical Primer for Ecologists. Princeton University Press.
+
+Hodgson, D., McDonald, J. L., & Hosken, D. J. (2015). What do you mean,‘resilient’?. Trends in ecology & evolution, 30(9), 503-506.
+
+Holling, C. S. (1973). Resilience and stability of ecological systems. Annual review of ecology and systematics, 4(1), 1-23.
 
 Houghton, R. A., Hackler, J. L., & Lawrence, K. T. (1999). The US carbon budget: contributions from land-use change. Science, 285(5427), 574-578.
 
@@ -200,6 +219,10 @@ Hoylman, Z. H., Jencso, K., Archer, V., Efta, J. A., Holden, Z. A., Ballantyne, 
 Jay, S., Potter, C., Crabtree, R., Genovese, V., Weiss, D. J., & Kraft, M. (2016). Evaluation of modelled net primary production using MODIS and landsat satellite data fusion. Carbon Balance and Management, 11(1), 1-13.
 
 Keenan, T. F., & Williams, C. A. (2018). The terrestrial carbon sink. Annu. Rev. Environ. Resour, 43(1), 219-243.
+
+Kleinman, J. S., Goode, J. D., Fries, A. C., & Hart, J. L. (2019). Ecological consequences of compound disturbances in forest ecosystems: a systematic review. Ecosphere, 10(11), e02962.
+
+Lake, P. S. (2013). Resistance, resilience and restoration. Ecological management & restoration, 14(1), 20-24.
 
 Law, B. E., Sun, O. J., Campbell, J., Van Tuyl, S., & Thornton, P. E. (2003). Changes in carbon storage and fluxes in a chronosequence of ponderosa pine. Global change biology, 9(4), 510-524.
 
@@ -211,6 +234,8 @@ Peñuelas, J., Ciais, P., Canadell, J. G., Janssens, I. A., Fernández-Martínez
 
 Plummer, M. (2003). JAGS: A program for analysis of Bayesian graphical models using Gibbs sampling. DSC Working Papers. Proceedings of the 3rd International Workshop on Distributed Statistical Computing, March 20-22, 2003. Technische Universitat Wien, Vienna, Austria.
 
+Povak, N. A., Hessburg, P. F., & Salter, R. B. (2018). Evidence for scale‐dependent topographic controls on wildfire spread. Ecosphere, 9(10), e02443.
+
 Pregitzer, K. S., & Euskirchen, E. S. (2004). Carbon cycling and storage in world forests: biome patterns related to forest age. Global change biology, 10(12), 2052-2077.
 
 Prichard, S. J., Hessburg, P. F., Hagmann, R. K., Povak, N. A., Dobrowski, S. Z., Hurteau, M. D., ... & Khatri‐Chhetri, P. (2021). Adapting western North American forests to climate change and wildfires: 10 common questions. Ecological Applications, 31(8), e02433.
@@ -219,9 +244,13 @@ Rodman, K. C., Veblen, T. T., Battaglia, M. A., Chambers, M. E., Fornwalt, P. J.
 
 Savage, M., Mast, J. N., & Feddema, J. J. (2013). Double whammy: high-severity fire and drought in ponderosa pine forests of the Southwest. Canadian Journal of Forest Research, 43(6), 570-583.
 
+Steel, Z. L., Foster, D., Coppoletta, M., Lydersen, J. M., Stephens, S. L., Paudel, A., ... & Collins, B. M. (2021). Ecological resilience and vegetation transition in the face of two successive large wildfires. Journal of Ecology, 109(9), 3340-3355.
+
 Stephens, S. L. (2005). Forest fire causes and extent on United States Forest Service lands. International Journal of Wildland Fire, 14(3), 213-222.
 
 Stephenson, N. (1998). Actual evapotranspiration and deficit: biologically meaningful correlates of vegetation distribution across spatial scales. Journal of biogeography, 25(5), 855-870.
+
+[USFS] United States Department of Agriculture, Forest Service. (2020). Major Forest Insect and Disease Conditions in the United States: 2018. US Forest Service, Forest Health Protection. Available online at: https://www.fs.usda.gov/foresthealth/publications/ConditionsReport_2018.pdf.
 
 [USFS] United States Department of Agriculture, Forest Service. (2021). Forest Insect and Disease Conditions in the Rocky Mountain Region, 2020. Fort Collins, CO: USDA Forest Service, Rocky Mountain Region, Forest Health, R2– RO–21-01.
 
